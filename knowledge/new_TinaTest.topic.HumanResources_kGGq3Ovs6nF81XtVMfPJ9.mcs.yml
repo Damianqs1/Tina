@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Human Resources Intra
+  description: Centralized knowledge hub for Human Resources. Contains employee-related information, HR policies and procedures, benefits, forms, workplace processes, employee support resources, and other Human Resources documentation. Use this source to answer employee questions about HR processes, benefits, policies, procedures, forms, and workplace-related resources.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: =Global.Country = "USA"
+  site: https://abacenter.sharepoint.com/sites/Human-Resources
+  additionalSearchTerms:

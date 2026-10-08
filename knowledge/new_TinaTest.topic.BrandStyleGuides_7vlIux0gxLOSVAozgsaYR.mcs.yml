@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Brand Style Guides Intra
+  description: This knowledge source provides information found in Brand Style Guides SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABAMarketingDepartment/Brand%20Style%20Guides
+  additionalSearchTerms:

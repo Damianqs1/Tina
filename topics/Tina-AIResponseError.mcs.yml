@@ -1,0 +1,43 @@
+mcs.metadata:
+  componentName: Out of Scope Response
+  description: Use this topic when the user's request is outside the agent's supported scope or cannot be answered using the agent's available knowledge and capabilities. This includes requests for unrelated subjects such as movies, entertainment, sports, news, or general topics unrelated to ABA Centers. Provide the standard out-of-scope response and display the Tina error image.
+kind: AdaptiveDialog
+modelDisplayName: Out of Scope
+modelDescription: Handles requests that are outside the supported ABA Centers scope. Use this topic when the user asks for information unrelated to ABA Centers or when the agent cannot provide a reliable answer. Respond with the configured out-of-scope message and display the Tina error image.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SendActivity
+      id: sendActivity_Ym3d28
+      activity:
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "Sorry. This request is outside my scope as the ABA Centers AI Assistant. I can only help with ABA Centers and its services.",
+                    "wrap": true,
+                    "horizontalAlignment": "Center",
+                    "size": "Small"
+                  },
+                  {
+                    "type": "Image",
+                    "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Sorry.png?d=we2cb639a3cb947c1a6d861dfc44f98b8&csf=1&web=1&e=doijlW",
+                    "horizontalAlignment": "Center",
+                    "height": "200px"
+                  }
+                ]
+              }
+
+    - kind: EndDialog
+      id: 3zev9B
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,43 @@
+﻿{
+  "name": "UserRequest",
+  "instruction": "{{UserRequest}}  You are an AI assistant that classifies an IT support request into exactly one ServiceNow request type.\r\n\r\nAnalyze ONLY the user\u0027s request.\r\n\r\nDo not use information that is not contained in the user\u0027s request.\r\n\r\nDo not invent information.\r\n\r\nReturn exactly ONE request type from the list below.\r\n\r\nAVAILABLE REQUEST TYPES\r\n\r\n1. Dashboard Access Request\r\n\r\nUse when the user requests access to a dashboard or needs permissions to view a dashboard.\r\n\r\n2. Data / Report Request\r\n\r\nUse when the user requests data, a report, a data extraction, or creation/modification of a report.\r\n\r\n3. Accesories Request\r\n\r\nUse when the user requests an accessory for an existing device.\r\n\r\nExamples:\r\n- Mouse\r\n- Keyboard\r\n- Headset\r\n- Monitor\r\n- Docking station\r\n- Charger\r\n- Other computer accessories\r\n\r\nIMPORTANT:\r\nThe exact request type is:\r\n\u0022Accesories Request\u0022\r\n\r\n4. Hardware Request\r\n\r\nUse when the user requests a physical device or replacement of a physical device.\r\n\r\nExamples:\r\n- Laptop\r\n- Computer\r\n- iPhone\r\n- iPad\r\n- New device\r\n- Replacement device\r\n- Replace a laptop\r\n- Replace an iPhone\r\n- Replace an iPad\r\n\r\nIf the user wants a complete physical device, return:\r\n\r\n\u0022Hardware Request\u0022\r\n\r\n5. VPN Access Request\r\n\r\nUse when the user requests VPN access or needs access through a VPN.\r\n\r\n6. Email Release / Quarantine Exception\r\n\r\nUse when the user requests an email to be released from quarantine or requests an email quarantine exception.\r\n\r\n7. Email Distribution List\r\n\r\nUse when the user requests to create, join, modify, or manage an email distribution list.\r\n\r\n8. License / Access Request\r\n\r\nUse when the user requests a software license, application license, software access, or application access.\r\n\r\n9. Remote Access Setup (Travel)\r\n\r\nUse when the user requests remote access specifically related to travel.\r\n\r\n10. SharePoint Access Request\r\n\r\nUse when the user requests access to a SharePoint site, SharePoint folder, SharePoint list, or SharePoint resource.\r\n\r\n11. Telephony / CTM Number \u0026 Features\r\n\r\nUse when the user requests a CTM number, telephone number, telephony service, or CTM features.\r\n\r\nCLASSIFICATION RULES\r\n\r\n- Return only one request type.\r\n- Use the exact spelling from the list.\r\n- Do not return a category.\r\n- Do not return \u0022Hardware\u0022.\r\n- Do not return \u0022New device\u0022.\r\n- Do not return \u0022Replacement\u0022.\r\n- For a laptop, iPhone, iPad, or other complete physical device, return exactly:\r\n  \u0022Hardware Request\u0022\r\n- For an accessory such as a mouse, keyboard, headset, monitor, docking station, or charger, return exactly:\r\n  \u0022Accesories Request\u0022\r\n- If the request does not provide enough information to determine the request type, return:\r\n  \u0022NEEDS_CLARIFICATION\u0022\r\n\r\nOUTPUT\r\n\r\nReturn ONLY valid JSON.\r\n\r\nUse exactly this structure:\r\n\r\n{\r\n  \u0022requestType\u0022: \u0022...\u0022\r\n}",
+  "model": "gpt-41-mini",
+  "modelParameters": {
+    "gptParameters": {
+      "temperature": 0
+    }
+  },
+  "inputs": [
+    {
+      "id": "UserRequest",
+      "text": "UserRequest",
+      "type": "text",
+      "quickTestValue": "Topic.RequestDescription"
+    }
+  ],
+  "output": {
+    "formats": [
+      "json"
+    ],
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "requestType": {
+          "type": "string"
+        }
+      }
+    },
+    "jsonExamples": [
+      {
+        "requestType": "Hardware Request"
+      }
+    ],
+    "isCustomUserFormat": true
+  },
+  "settings": {
+    "recordRetrievalLimit": 30,
+    "shouldPreserveRecordLinks": null,
+    "runtime": null
+  },
+  "version": "GptDynamicPrompt-2"
+}

@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ICBD – Official Website
+  description: Official ICBD website containing information about ICBD’s business incubation platform, portfolio companies, platform capabilities, leadership, careers, news, awards, and contact information. Use this source to answer questions about ICBD, its business model, operating platform, portfolio companies, leadership, career opportunities, and publicly available company information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://icbd.com/

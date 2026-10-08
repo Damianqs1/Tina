@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: ABAMarketingDepartment Intra
+  description: This knowledge source provides information found in ABAMarketingDepartment SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABAMarketingDepartment
+  additionalSearchTerms:

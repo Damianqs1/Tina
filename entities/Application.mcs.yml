@@ -1,0 +1,113 @@
+mcs.metadata:
+  componentName: Application
+  description: List of applications and systems available in ServiceNow. Use this entity to identify the application or system related to the user's issue or request.
+kind: ClosedListEntity
+smartMatchingEnabled: true
+items:
+  - id: FEfutJ
+    displayName: Adobe Acrobat Pro
+
+  - id: JF5lVX
+    displayName: Adobe Suite
+
+  - id: 80vdKn
+    displayName: Atlassia Jira - Confluence
+
+  - id: v51Kju
+    displayName: Autodesk AutoCad
+
+  - id: ZrJqcH
+    displayName: Autodesck Revit
+
+  - id: 0pIRCK
+    displayName: Availity
+
+  - id: EzRvtJ
+    displayName: Call Tracking Matrics
+
+  - id: whcH14
+    displayName: Catalyst
+
+  - id: JpdTzu
+    displayName: Collaborate MD
+
+  - id: oK67Rp
+    displayName: Connect (EMR - RCM)
+
+  - id: rctnOn
+    displayName: Coupa
+
+  - id: XcKSDR
+    displayName: Dashlane
+
+  - id: FYZM08
+    displayName: DocuSing
+
+  - id: MCQKx4
+    displayName: Egencia
+
+  - id: i1J3ds
+    displayName: Frame.io
+
+  - id: yDYGgs
+    displayName: Humblefax
+
+  - id: 3zJ2Bf
+    displayName: KnowBe4
+
+  - id: cJD2q4
+    displayName: Lightning Step
+
+  - id: 0r7xwU
+    displayName: Microsoft Office 365
+
+  - id: MhO7kF
+    displayName: Mimecast
+
+  - id: eA0kTt
+    displayName: NetSuite
+
+  - id: 0iv9YK
+    displayName: NordLayer
+
+  - id: wKYvSC
+    displayName: Power BI
+
+  - id: JkYs40
+    displayName: Quick Deposit
+
+  - id: 2xVzen
+    displayName: Rec-Cube
+
+  - id: 5E9K1o
+    displayName: SalesForce
+
+  - id: IZyopn
+    displayName: SentinelOne
+
+  - id: pmNZLf
+    displayName: SharePoint
+
+  - id: KFX2wd
+    displayName: SmartClaims
+
+  - id: XAjGQS
+    displayName: Smartsheet
+
+  - id: E7LlK8
+    displayName: Tableau
+
+  - id: 6HySA0
+    displayName: TeamViewer
+
+  - id: ktUofC
+    displayName: UKG
+
+  - id: lAhDGi
+    displayName: Visio
+
+  - id: 9t4WfL
+    displayName: Workable
+
+  - id: 8nidrt
+    displayName: Zoom

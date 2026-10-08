@@ -1,0 +1,38 @@
+mcs.metadata:
+  componentName: Conversation Start
+  description: This system topic triggers when the agent receives an Activity indicating the beginning of a new conversation. If you do not want the agent to initiate the conversation, disable this topic.
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_M0LuhV
+      activity:
+        value: https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Wink.png?d=w62e957e60c5249d8a9040ac60263b612&csf=1&web=1&e=VuRPRg
+        speak:
+          - Hello and thank you for calling {System.Bot.Name}, powered by generative AI. How may I help you today?
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "Hello, my name is Tina. How can I help you today?",
+                    "horizontalAlignment": "Center",
+                    "size": "ExtraLarge",
+                    "weight": "Bolder",
+                    "wrap": true
+                  },
+                  {
+                    "type": "Image",
+                    "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Wink.png?d=w62e957e60c5249d8a9040ac60263b612&csf=1&web=1&e=Y6bohN",
+                    "horizontalAlignment": "Center",
+                    "height": "200px"
+                  }
+                ]
+              }

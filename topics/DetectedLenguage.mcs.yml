@@ -1,0 +1,46 @@
+mcs.metadata:
+  componentName: "Detected Lenguage "
+  description: |-
+    Determine which language this message is written in.
+
+    Return only one of these values:
+    English
+    Spanish
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  condition: =!IsBlank(System.Activity.Text)
+  actions:
+    - kind: BeginDialog
+      id: MhoNFd
+      input:
+        binding:
+          Message: =System.Activity.Text
+
+      dialog: new_TinaTest.action.DetectUserLanguage
+      output:
+        binding:
+          predictionOutput: Topic.Var1
+
+    - kind: ConditionGroup
+      id: conditionGroup_YH8lZb
+      conditions:
+        - id: conditionItem_QUWEKZ
+          condition: =Topic.Var1.structuredOutput.language = "Spanish"
+          actions:
+            - kind: SetVariable
+              id: setVariable_73N8Rq
+              variable: Global.Lenguage
+              value: Spanish
+
+        - id: conditionItem_KPqHIo
+          condition: =Topic.Var1.structuredOutput.language = "English"
+          actions:
+            - kind: SetVariable
+              id: setVariable_WRpbzz
+              variable: Global.Lenguage
+              value: English
+
+inputType: {}
+outputType: {}

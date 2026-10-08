@@ -1,0 +1,5 @@
+mcs.metadata:
+  componentName: ICBD Support Portal Catalog – US
+  description: Official ICBD Support Portal catalog containing information about available support services, incidents, requests, and related support offerings. This knowledge source is exclusively intended for authorized ICBD users in the United States and should only be used when Global.Country2 is US.
+kind: FileAttachmentComponentMetadata
+triggerCondition: =Global.Country = "USA"

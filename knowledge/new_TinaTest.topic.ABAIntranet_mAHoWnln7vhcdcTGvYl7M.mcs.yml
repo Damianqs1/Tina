@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: ABA-Intranet
+  description: This knowledge source provides information found in ABA-Intranet SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABA-Intranet
+  additionalSearchTerms:

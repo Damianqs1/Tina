@@ -1,0 +1,41 @@
+displayName: Tina
+schemaName: new_TinaTest
+accessControlPolicy: GroupMembership
+authenticationMode: Integrated
+authenticationTrigger: Always
+authorizedSecurityGroupIds:
+  - 6c399590-0b2e-4062-bd08-caafbe6519ff
+configuration:
+  channels:
+    - channelId: MsTeams
+
+    - channelId: Microsoft365Copilot
+
+  settings:
+    GenerativeActionsEnabled: true
+
+  isAgentConnectable: true
+  publishOnImport: true
+  gPTSettings:
+    defaultSchemaName: new_TinaTest.gpt.default
+
+  isLightweightBot: false
+  aISettings:
+    useModelKnowledge: true
+    isFileAnalysisEnabled: true
+    isSemanticSearchEnabled: true
+    contentModeration: Low
+    optInUseLatestModels: false
+
+  recognizer:
+    kind: GenerativeAIRecognizer
+
+  deferredProvisioning: false
+
+publishedOn: 2026-10-07T21:24:32.0000000Z
+template: default-2.1.0
+language: 1033
+supportedLanguages:
+  - 1034
+  - 20490
+  - 21514

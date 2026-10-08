@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of New Jersey – Official Website
+  description: Official ABA Centers of New Jersey website containing information about autism services, autism diagnosis, child and teen ABA therapy, early intervention, in-school and in-home ABA services, insurance benefits, locations, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of New Jersey and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacentersnj.com/

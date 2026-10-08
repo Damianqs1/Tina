@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: Exact Billing Solutions
+  description: Official Exact Billing Solutions website providing information about revenue cycle management, medical billing, coding, claims processing, and related healthcare financial services.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.exactbilling.com/

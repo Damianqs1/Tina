@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Academy – Official Website
+  description: Official ABA Academy website containing information about ABA therapy services, autism resources, family and caregiver support, insurance coverage, employment opportunities, staff, history, contact information, and programs offered by ABA Academy in Arlington/Pantego, Texas. Use this source to answer questions about ABA Academy and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abaacademy.com

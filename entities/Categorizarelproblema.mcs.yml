@@ -1,0 +1,19 @@
+mcs.metadata:
+  componentName: Categorizar el problema
+kind: ClosedListEntity
+smartMatchingEnabled: true
+items:
+  - id: TIJCuE
+    displayName: Pregunta general
+
+  - id: 7N17We
+    displayName: Problema no crítico
+
+  - id: RnsrlB
+    displayName: Fallo parcial del sistema
+
+  - id: AaKsuZ
+    displayName: Caída del sistema
+
+  - id: YZdiEE
+    displayName: Otros

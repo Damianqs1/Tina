@@ -1,0 +1,24 @@
+mcs.metadata:
+  componentName: Category
+kind: ClosedListEntity
+items:
+  - id: WrYy18
+    displayName: Devices & Hardware
+
+  - id: 8zIKOW
+    displayName: Inquiry / Help
+
+  - id: MvfOxj
+    displayName: Software
+
+  - id: e4dnww
+    displayName: Hardware
+
+  - id: euMEnW
+    displayName: Network
+
+  - id: u819NS
+    displayName: Database
+
+  - id: RjqCY3
+    displayName: Password Reset

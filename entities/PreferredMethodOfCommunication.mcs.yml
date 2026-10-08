@@ -1,0 +1,13 @@
+mcs.metadata:
+  componentName: Preferred Method Of Communication
+kind: ClosedListEntity
+smartMatchingEnabled: true
+items:
+  - id: T6TCQ3
+    displayName: Email
+
+  - id: MLGeIK
+    displayName: Phone
+
+  - id: cpsRFf
+    displayName: Teams

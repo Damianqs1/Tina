@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: ICBD Intranet
+  description: ICBD Intranet is the organization's internal portal for accessing company information, news, events, employee resources, policies, procedures, leadership updates, and internal tools.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ICBDIntranet
+  additionalSearchTerms:

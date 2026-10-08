@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: HR Knowledge Base – US Employees
+  description: HR Knowledge Base containing official HR policies, benefits, procedures, and employee resources for ABA Centers of America. This knowledge source is exclusively intended for authorized users in the United States and should only be used to provide HR information applicable to U.S.-based employees.ation applicable to U.S.-based employees. knowledge source provides information found in HR Knowledge Base SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: =Global.Country2 = "US"
+  site: https://abacenter.sharepoint.com/sites/HRAgentKB/HR%20Knowledge%20Base
+  additionalSearchTerms:

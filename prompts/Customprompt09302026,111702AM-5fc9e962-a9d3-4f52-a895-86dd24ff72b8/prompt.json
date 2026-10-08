@@ -1,0 +1,43 @@
+﻿{
+  "name": "Custom prompt 09/30/2026, 11:17:02 AM",
+  "instruction": "Classify the user\u0027s request into exactly one ServiceNow Request Category.\r\n\r\nAvailable categories:\r\n\r\n* Data \u0026 Analytic\r\n* Hardware\r\n* Network\r\n* Privacy and Security\r\n* Software\r\n\r\nUser request:\r\n{{Topic.RequestDescription}}\r\n\r\nRules:\r\n\r\n1. Select exactly one category from the available categories.\r\n2. Do not create or invent categories.\r\n3. Base the classification only on the user\u0027s request.\r\n4. If the request is too ambiguous to determine a category, return \u0022NEEDS_CLARIFICATION\u0022.\r\n5. Return the result using the configured JSON format.\r\n       {{UserRequest}} ",
+  "model": "gpt-41-mini",
+  "modelParameters": {
+    "gptParameters": {
+      "temperature": 0
+    }
+  },
+  "inputs": [
+    {
+      "id": "UserRequest",
+      "text": "UserRequest",
+      "type": "text",
+      "quickTestValue": "I need access to SharePoint because I need to work with my team\u0027s documents."
+    }
+  ],
+  "output": {
+    "formats": [
+      "json"
+    ],
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "requestCategory": {
+          "type": "string"
+        }
+      }
+    },
+    "jsonExamples": [
+      {
+        "requestCategory": "Software"
+      }
+    ],
+    "isCustomUserFormat": true
+  },
+  "settings": {
+    "recordRetrievalLimit": 30,
+    "shouldPreserveRecordLinks": null,
+    "runtime": null
+  },
+  "version": "GptDynamicPrompt-2"
+}

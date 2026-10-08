@@ -1,0 +1,44 @@
+mcs.metadata:
+  componentName: Thank you
+  description: This topic triggers when the user says thank you.
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Thank you
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - thanks
+      - thank you
+      - thanks so much
+      - ty
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_9iz6v7
+      activity:
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "You're welcome",
+                    "wrap": true,
+                    "size": "ExtraLarge",
+                    "weight": "Bolder",
+                    "horizontalAlignment": "Center"
+                  },
+                  {
+                    "type": "Image",
+                    "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/3_4%20profile.png?d=wbce7e63344d0444789970fd9198875c3&csf=1&web=1&e=i7yaVN",
+                    "horizontalAlignment": "Center",
+                    "height": "200px"
+                  }
+                ]
+              }

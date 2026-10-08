@@ -1,0 +1,42 @@
+﻿{
+  "name": "Detect User Language",
+  "instruction": "Determine which language the user\u0027s message is written in.\r\n\r\nReturn only one of these values:\r\nEnglish\r\nSpanish \n\n {{Message}} ",
+  "model": "gpt-41-mini",
+  "modelParameters": {
+    "gptParameters": {
+      "temperature": 0
+    }
+  },
+  "inputs": [
+    {
+      "id": "Message",
+      "text": "Message",
+      "type": "text",
+      "quickTestValue": "Message from the user."
+    }
+  ],
+  "output": {
+    "formats": [
+      "json"
+    ],
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "jsonExamples": [
+      {
+        "language": "English"
+      }
+    ]
+  },
+  "settings": {
+    "recordRetrievalLimit": 30,
+    "shouldPreserveRecordLinks": null,
+    "runtime": null
+  },
+  "version": "GptDynamicPrompt-2"
+}

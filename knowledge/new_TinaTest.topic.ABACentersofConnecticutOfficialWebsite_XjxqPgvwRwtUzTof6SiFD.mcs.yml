@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Connecticut – Official Website
+  description: Official ABA Centers of Connecticut website containing information about autism services, autism screening and diagnosis, early intervention, child and teen ABA therapy, in-home and in-school ABA therapy, center-based services, insurance, locations, service areas, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Connecticut and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacentersct.com/

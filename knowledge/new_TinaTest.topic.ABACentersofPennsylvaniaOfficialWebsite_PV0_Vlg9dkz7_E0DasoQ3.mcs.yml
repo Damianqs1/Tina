@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Pennsylvania – Official Website
+  description: Official ABA Centers of Pennsylvania website containing information about autism services, autism screening and diagnosis, early intervention, ABA therapy for children and teens, in-home and in-school ABA therapy, insurance and benefits, locations, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Pennsylvania and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacenterspa.com/

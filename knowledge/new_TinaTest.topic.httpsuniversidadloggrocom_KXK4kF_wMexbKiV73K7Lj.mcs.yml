@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: Universidad Loggro – Guías y Soporte de Productos
+  description: Knowledge source for learning and support related to Loggro products. Use this source to answer questions about Loggro features, modules, configuration, processes, tutorials, FAQs, product updates, and how-to guidance. The source includes educational content for Loggro Pymes, POS Tienda, Nómina, Restobar, and Alojamientos, as well as guides, videos, courses, and implementation resources. Use the information from this source as the primary reference for questions about how to use Loggro products. Do not invent functionality, procedures, or product information that is not supported by the source.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  triggerCondition: =Global.Country2 = "COL-Medellin"
+  site: https://universidad.loggro.com/

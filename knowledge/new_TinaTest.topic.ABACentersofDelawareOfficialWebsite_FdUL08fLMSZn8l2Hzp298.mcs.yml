@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Delaware – Official Website
+  description: Official ABA Centers of Delaware website containing information about autism services, autism screening and diagnosis, early intervention, child and teen ABA therapy, in-home ABA therapy, insurance benefits, consultations, locations, careers, and contact information. Use this source to answer questions about ABA Centers of Delaware and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacentersde.com/

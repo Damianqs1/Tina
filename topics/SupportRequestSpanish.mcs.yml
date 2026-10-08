@@ -1,0 +1,1037 @@
+mcs.metadata:
+  componentName: Support Request Spanish
+  description: |-
+    Use this topic when the user wants to create, open, submit, or formally report an IT support ticket or support request.
+
+    This topic handles requests to create a Jira or IT support ticket for an IT issue. Use it when the user explicitly wants to submit or report the issue, including requests such as "I need to create a ticket", "I want to open a ticket", or "I want to report this issue".
+
+    Do not use this topic only because troubleshooting was unsuccessful if the user has not indicated that they want to submit or report the issue.
+kind: AdaptiveDialog
+modelDescription: |-
+  Use this topic when the user wants to formally report an IT issue or create, open, submit, or register a support ticket or support request.
+
+  Use this topic when the user explicitly asks to create a Jira/IT support ticket, report an unresolved technical issue, or submit a request for IT support.
+
+  Do not use this topic only because a technical issue could not be resolved. The user must indicate that they want to formally report or submit the issue.
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: question_lYbmH7
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Option1
+      prompt: ¿Te gustaría que cree una solicitud de soporte por ti?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: sI
+              displayName: SI
+
+            - id: No
+              displayName: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_MmHwN3
+      conditions:
+        - id: conditionItem_VIrWPI
+          condition: =Topic.Option1 = 'new_TinaTest.topic.SupportRequestSpanish.main.question_lYbmH7'.sI
+
+        - id: conditionItem_0bsI86
+          condition: =Topic.Option1 = 'new_TinaTest.topic.SupportRequestSpanish.main.question_lYbmH7'.No
+          actions:
+            - kind: EndDialog
+              id: nrPIfj
+
+      elseActions:
+        - kind: GotoAction
+          id: B0EAiF
+          actionId: question_lYbmH7
+
+    - kind: Question
+      id: question_WUsQwa
+      interruptionPolicy:
+        allowInterruption: false
+
+      unrecognizedPrompt: "Please select one of the available options: Email, Phone, or Teams."
+      alwaysPrompt: true
+      variable: init:Topic.MethodContact
+      prompt: "Método de contacto preferido : "
+      entity:
+        kind: ClosedListEntityReference
+        entityId: new_TinaTest.entity.PreferredMethodOfCommunication
+        selectedItems:
+          - T6TCQ3
+          - MLGeIK
+          - cpsRFf
+
+    - kind: Question
+      id: question_J43KiF
+      interruptionPolicy:
+        allowInterruption: false
+
+      unrecognizedPrompt: "Please select one of the available options: General Question, Non-Critical Issue, Partial System Failure, or System Down."
+      alwaysPrompt: true
+      variable: init:Topic.Categorize
+      prompt: How would you categorize your issue?
+      entity:
+        kind: ClosedListEntityReference
+        entityId: new_TinaTest.entity.Categorizarelproblema
+        selectedItems:
+          - TIJCuE
+          - 7N17We
+          - RnsrlB
+          - AaKsuZ
+          - YZdiEE
+
+    - kind: Question
+      id: question_K01wGs
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Title
+      prompt: Cuéntanos brevemente qué está pasando o qué necesitas.
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: question_ekohXC
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Description
+      prompt: Cuéntanos con más detalle qué problema tienes o qué necesitas.
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: question_3wg0Ax
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Application
+      prompt: ¿Con qué aplicación o sistema está relacionado tu problema?
+      entity: StringPrebuiltEntity
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_sNKmGM
+      input:
+        binding:
+          body: "={cmdb_ci: Topic.Application, description: Topic.Description, location: Global.Country2, opened_by: System.User.DisplayName, requested_date: System.User.DisplayName, requested_for: System.User.DisplayName, short_description: Topic.Title}"
+          tableType: sc_request
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.CreateRecord
+
+      connectionReference: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+      connectionProperties:
+        name: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+        mode: Maker
+
+      dynamicInputSchema:
+        properties:
+          body:
+            isRequired: true
+            order: 1
+            type:
+              kind: Record
+              properties:
+                active:
+                  displayName: Active
+                  order: 29
+                  type: String
+
+                activity_due:
+                  displayName: Activity due
+                  description: Date by which the Inactivity Monitor expects the task to be updated
+                  order: 63
+                  type: String
+
+                additional_assignee_list:
+                  displayName: Additional assignee list
+                  description: Additional assignees
+                  order: 49
+                  type: String
+
+                approval:
+                  displayName: Approval
+                  order: 66
+                  type: String
+
+                approval_history:
+                  displayName: Approval history
+                  order: 8
+                  type: String
+
+                approval_set:
+                  displayName: Approval set
+                  order: 40
+                  type: String
+
+                assigned_to:
+                  displayName: Assigned to
+                  description: Person primarily responsible for working this task
+                  order: 64
+                  type: String
+
+                assignment_group:
+                  displayName: Assignment group
+                  order: 47
+                  type: String
+
+                business_duration:
+                  displayName: Business duration
+                  description: Business time elapsed before task was closed
+                  order: 37
+                  type: String
+
+                business_service:
+                  displayName: Service
+                  order: 31
+                  type: String
+
+                calendar_duration:
+                  displayName: Duration
+                  description: Time elapsed before task was closed
+                  order: 51
+                  type: String
+
+                calendar_stc:
+                  displayName: Resolve Time
+                  order: 22
+                  type: String
+
+                close_notes:
+                  displayName: Close notes
+                  order: 52
+                  type: String
+
+                closed_at:
+                  displayName: Closed
+                  order: 24
+                  type: String
+
+                closed_by:
+                  displayName: Closed by
+                  order: 55
+                  type: String
+
+                cmdb_ci:
+                  displayName: Configuration item
+                  description: Item or service affected
+                  order: 25
+                  type: String
+
+                comments:
+                  displayName: Additional comments
+                  description: Journaled field, shared with the end user
+                  order: 65
+                  type: String
+
+                comments_and_work_notes:
+                  displayName: Comments and Work notes
+                  description: Combined output of Additional comments and Work notes
+                  order: 68
+                  type: String
+
+                company:
+                  displayName: Company
+                  order: 61
+                  type: String
+
+                contact_type:
+                  displayName: Contact type
+                  order: 58
+                  type: String
+
+                contract:
+                  displayName: Contract
+                  order: 27
+                  type: String
+
+                correlation_display:
+                  displayName: Correlation display
+                  order: 44
+                  type: String
+
+                correlation_id:
+                  displayName: Correlation ID
+                  order: 76
+                  type: String
+
+                delivery_address:
+                  displayName: Delivery address
+                  order: 1
+                  type: String
+
+                delivery_plan:
+                  displayName: Delivery plan
+                  order: 26
+                  type: String
+
+                delivery_task:
+                  displayName: Delivery task
+                  order: 45
+                  type: String
+
+                description:
+                  displayName: Description
+                  order: 50
+                  type: String
+
+                due_date:
+                  displayName: Due date
+                  description: Expected date from assigned to
+                  order: 69
+                  type: String
+
+                escalation:
+                  displayName: Escalation
+                  order: 74
+                  type: String
+
+                expected_start:
+                  displayName: Expected start
+                  order: 35
+                  type: String
+
+                follow_up:
+                  displayName: Follow up
+                  order: 56
+                  type: String
+
+                group_list:
+                  displayName: Group list
+                  description: Interested groups
+                  order: 38
+                  type: String
+
+                impact:
+                  displayName: Impact
+                  description: Measure of the business criticality of the affected service
+                  order: 28
+                  type: String
+
+                knowledge:
+                  displayName: Knowledge
+                  description: If checked, will automatically create a Draft knowledge article upon closure
+                  order: 20
+                  type: String
+
+                location:
+                  displayName: Location
+                  description: Where the caller or service is located
+                  order: 77
+                  type: String
+
+                made_sla:
+                  displayName: Made SLA
+                  order: 2
+                  type: String
+
+                number:
+                  displayName: Number
+                  order: 10
+                  type: String
+
+                opened_at:
+                  displayName: Opened
+                  order: 36
+                  type: String
+
+                opened_by:
+                  displayName: Opened by
+                  order: 12
+                  type: String
+
+                order:
+                  displayName: Order
+                  order: 21
+                  type: String
+
+                parent:
+                  displayName: Parent
+                  order: 0
+                  type: String
+
+                parent_interaction:
+                  displayName: Parent interaction
+                  order: 48
+                  type: String
+
+                price:
+                  displayName: Price
+                  order: 14
+                  type: String
+
+                priority:
+                  displayName: Priority
+                  description: Sequence in which an Incident or Problem needs to be resolved, based on impact and urgency
+                  order: 32
+                  type: String
+
+                reassignment_count:
+                  displayName: Reassignment count
+                  order: 62
+                  type: String
+
+                request_state:
+                  displayName: Request state
+                  order: 72
+                  type: String
+
+                requested_date:
+                  displayName: Requested for date
+                  description: Desired delivery date
+                  order: 60
+                  type: String
+
+                requested_for:
+                  displayName: Requested for
+                  description: On behalf of another individual
+                  order: 5
+                  type: String
+
+                route_reason:
+                  displayName: Transfer reason
+                  order: 18
+                  type: String
+
+                service_offering:
+                  displayName: Service offering
+                  order: 53
+                  type: String
+
+                short_description:
+                  displayName: Short description
+                  order: 43
+                  type: String
+
+                skills:
+                  displayName: Skills
+                  description: Required skills
+                  order: 9
+                  type: String
+
+                sla_due:
+                  displayName: SLA due
+                  description: Date by which the SLA expects this task to be completed
+                  order: 67
+                  type: String
+
+                special_instructions:
+                  displayName: Special instructions
+                  order: 23
+                  type: String
+
+                stage:
+                  displayName: Stage
+                  order: 73
+                  type: String
+
+                state:
+                  displayName: State
+                  order: 17
+                  type: String
+
+                sys_class_name:
+                  displayName: Task type
+                  order: 54
+                  type: String
+
+                sys_created_by:
+                  displayName: Created by
+                  order: 19
+                  type: String
+
+                sys_created_on:
+                  displayName: Created
+                  order: 15
+                  type: String
+
+                sys_domain:
+                  displayName: Domain
+                  description: Domain to which the task belongs
+                  order: 16
+                  type: String
+
+                sys_domain_path:
+                  displayName: Domain Path
+                  order: 33
+                  type: String
+
+                sys_id:
+                  displayName: Sys ID
+                  order: 57
+                  type: String
+
+                sys_mod_count:
+                  displayName: Updates
+                  order: 70
+                  type: String
+
+                sys_tags:
+                  displayName: Tags
+                  order: 71
+                  type: String
+
+                sys_updated_by:
+                  displayName: Updated by
+                  order: 11
+                  type: String
+
+                sys_updated_on:
+                  displayName: Updated
+                  order: 6
+                  type: String
+
+                task_effective_number:
+                  displayName: Effective number
+                  order: 7
+                  type: String
+
+                time_worked:
+                  displayName: Time worked
+                  order: 34
+                  type: String
+
+                universal_request:
+                  displayName: Universal Request
+                  order: 42
+                  type: String
+
+                upon_approval:
+                  displayName: Upon approval
+                  order: 75
+                  type: String
+
+                upon_reject:
+                  displayName: Upon reject
+                  order: 4
+                  type: String
+
+                urgency:
+                  displayName: Urgency
+                  description: Measure of the business criticality based on the impact and on the business needs of the Customer
+                  order: 59
+                  type: String
+
+                user_input:
+                  displayName: User input
+                  order: 13
+                  type: String
+
+                watch_list:
+                  displayName: Watch list
+                  description: Interested users
+                  order: 3
+                  type: String
+
+                work_end:
+                  displayName: Actual end
+                  order: 39
+                  type: String
+
+                work_notes:
+                  displayName: Work notes
+                  order: 41
+                  type: String
+
+                work_notes_list:
+                  displayName: Work notes list
+                  description: Users interested in work notes
+                  order: 30
+                  type: String
+
+                work_start:
+                  displayName: Actual start
+                  order: 46
+                  type: String
+
+          sysparm_display_value:
+            displayName: Display System References
+            description: Determines if system references should be included
+            visibility: Advanced
+            order: 2
+            type: Boolean
+
+          sysparm_exclude_reference_link:
+            displayName: Exclude Reference Links
+            description: Determines if reference links should be excluded
+            visibility: Advanced
+            order: 4
+            type: Boolean
+
+          sysparm_fields:
+            displayName: Fields
+            description: "Comma-separated list of fields to be returned. Example: name,email,phone"
+            visibility: Advanced
+            order: 5
+            type: String
+
+          sysparm_input_display_value:
+            displayName: Display Input System References
+            description: Determines if input values are treated as display values (true) or raw/internal values (false). When true, the API interprets field values in the request body as display values (e.g., 'Resolved' for state) and maps them to internal values.
+            visibility: Advanced
+            order: 3
+            type: Boolean
+
+          tableType:
+            displayName: Record Type
+            description: Type of record to list
+            isRequired: true
+            order: 0
+            dynamicValuesConfig:
+              capability: List
+
+            type: String
+
+      dynamicOutputSchema:
+        kind: Record
+        properties:
+          result:
+            order: 0
+            type:
+              kind: Record
+              properties:
+                active:
+                  displayName: Active
+                  order: 29
+                  type: String
+
+                activity_due:
+                  displayName: Activity due
+                  description: Date by which the Inactivity Monitor expects the task to be updated
+                  order: 63
+                  type: String
+
+                additional_assignee_list:
+                  displayName: Additional assignee list
+                  description: Additional assignees
+                  order: 49
+                  type: String
+
+                approval:
+                  displayName: Approval
+                  order: 66
+                  type: String
+
+                approval_history:
+                  displayName: Approval history
+                  order: 8
+                  type: String
+
+                approval_set:
+                  displayName: Approval set
+                  order: 40
+                  type: String
+
+                assigned_to:
+                  displayName: Assigned to
+                  description: Person primarily responsible for working this task
+                  order: 64
+                  type: String
+
+                assignment_group:
+                  displayName: Assignment group
+                  order: 47
+                  type: String
+
+                business_duration:
+                  displayName: Business duration
+                  description: Business time elapsed before task was closed
+                  order: 37
+                  type: String
+
+                business_service:
+                  displayName: Service
+                  order: 31
+                  type: String
+
+                calendar_duration:
+                  displayName: Duration
+                  description: Time elapsed before task was closed
+                  order: 51
+                  type: String
+
+                calendar_stc:
+                  displayName: Resolve Time
+                  order: 22
+                  type: String
+
+                close_notes:
+                  displayName: Close notes
+                  order: 52
+                  type: String
+
+                closed_at:
+                  displayName: Closed
+                  order: 24
+                  type: String
+
+                closed_by:
+                  displayName: Closed by
+                  order: 55
+                  type: String
+
+                cmdb_ci:
+                  displayName: Configuration item
+                  description: Item or service affected
+                  order: 25
+                  type: String
+
+                comments:
+                  displayName: Additional comments
+                  description: Journaled field, shared with the end user
+                  order: 65
+                  type: String
+
+                comments_and_work_notes:
+                  displayName: Comments and Work notes
+                  description: Combined output of Additional comments and Work notes
+                  order: 68
+                  type: String
+
+                company:
+                  displayName: Company
+                  order: 61
+                  type: String
+
+                contact_type:
+                  displayName: Contact type
+                  order: 58
+                  type: String
+
+                contract:
+                  displayName: Contract
+                  order: 27
+                  type: String
+
+                correlation_display:
+                  displayName: Correlation display
+                  order: 44
+                  type: String
+
+                correlation_id:
+                  displayName: Correlation ID
+                  order: 76
+                  type: String
+
+                delivery_address:
+                  displayName: Delivery address
+                  order: 1
+                  type: String
+
+                delivery_plan:
+                  displayName: Delivery plan
+                  order: 26
+                  type: String
+
+                delivery_task:
+                  displayName: Delivery task
+                  order: 45
+                  type: String
+
+                description:
+                  displayName: Description
+                  order: 50
+                  type: String
+
+                due_date:
+                  displayName: Due date
+                  description: Expected date from assigned to
+                  order: 69
+                  type: String
+
+                escalation:
+                  displayName: Escalation
+                  order: 74
+                  type: String
+
+                expected_start:
+                  displayName: Expected start
+                  order: 35
+                  type: String
+
+                follow_up:
+                  displayName: Follow up
+                  order: 56
+                  type: String
+
+                group_list:
+                  displayName: Group list
+                  description: Interested groups
+                  order: 38
+                  type: String
+
+                impact:
+                  displayName: Impact
+                  description: Measure of the business criticality of the affected service
+                  order: 28
+                  type: String
+
+                knowledge:
+                  displayName: Knowledge
+                  description: If checked, will automatically create a Draft knowledge article upon closure
+                  order: 20
+                  type: String
+
+                location:
+                  displayName: Location
+                  description: Where the caller or service is located
+                  order: 77
+                  type: String
+
+                made_sla:
+                  displayName: Made SLA
+                  order: 2
+                  type: String
+
+                number:
+                  displayName: Number
+                  order: 10
+                  type: String
+
+                opened_at:
+                  displayName: Opened
+                  order: 36
+                  type: String
+
+                opened_by:
+                  displayName: Opened by
+                  order: 12
+                  type: String
+
+                order:
+                  displayName: Order
+                  order: 21
+                  type: String
+
+                parent:
+                  displayName: Parent
+                  order: 0
+                  type: String
+
+                parent_interaction:
+                  displayName: Parent interaction
+                  order: 48
+                  type: String
+
+                price:
+                  displayName: Price
+                  order: 14
+                  type: String
+
+                priority:
+                  displayName: Priority
+                  description: Sequence in which an Incident or Problem needs to be resolved, based on impact and urgency
+                  order: 32
+                  type: String
+
+                reassignment_count:
+                  displayName: Reassignment count
+                  order: 62
+                  type: String
+
+                request_state:
+                  displayName: Request state
+                  order: 72
+                  type: String
+
+                requested_date:
+                  displayName: Requested for date
+                  description: Desired delivery date
+                  order: 60
+                  type: String
+
+                requested_for:
+                  displayName: Requested for
+                  description: On behalf of another individual
+                  order: 5
+                  type: String
+
+                route_reason:
+                  displayName: Transfer reason
+                  order: 18
+                  type: String
+
+                service_offering:
+                  displayName: Service offering
+                  order: 53
+                  type: String
+
+                short_description:
+                  displayName: Short description
+                  order: 43
+                  type: String
+
+                skills:
+                  displayName: Skills
+                  description: Required skills
+                  order: 9
+                  type: String
+
+                sla_due:
+                  displayName: SLA due
+                  description: Date by which the SLA expects this task to be completed
+                  order: 67
+                  type: String
+
+                special_instructions:
+                  displayName: Special instructions
+                  order: 23
+                  type: String
+
+                stage:
+                  displayName: Stage
+                  order: 73
+                  type: String
+
+                state:
+                  displayName: State
+                  order: 17
+                  type: String
+
+                sys_class_name:
+                  displayName: Task type
+                  order: 54
+                  type: String
+
+                sys_created_by:
+                  displayName: Created by
+                  order: 19
+                  type: String
+
+                sys_created_on:
+                  displayName: Created
+                  order: 15
+                  type: String
+
+                sys_domain:
+                  displayName: Domain
+                  description: Domain to which the task belongs
+                  order: 16
+                  type: String
+
+                sys_domain_path:
+                  displayName: Domain Path
+                  order: 33
+                  type: String
+
+                sys_id:
+                  displayName: Sys ID
+                  order: 57
+                  type: String
+
+                sys_mod_count:
+                  displayName: Updates
+                  order: 70
+                  type: String
+
+                sys_tags:
+                  displayName: Tags
+                  order: 71
+                  type: String
+
+                sys_updated_by:
+                  displayName: Updated by
+                  order: 11
+                  type: String
+
+                sys_updated_on:
+                  displayName: Updated
+                  order: 6
+                  type: String
+
+                task_effective_number:
+                  displayName: Effective number
+                  order: 7
+                  type: String
+
+                time_worked:
+                  displayName: Time worked
+                  order: 34
+                  type: String
+
+                universal_request:
+                  displayName: Universal Request
+                  order: 42
+                  type: String
+
+                upon_approval:
+                  displayName: Upon approval
+                  order: 75
+                  type: String
+
+                upon_reject:
+                  displayName: Upon reject
+                  order: 4
+                  type: String
+
+                urgency:
+                  displayName: Urgency
+                  description: Measure of the business criticality based on the impact and on the business needs of the Customer
+                  order: 59
+                  type: String
+
+                user_input:
+                  displayName: User input
+                  order: 13
+                  type: String
+
+                watch_list:
+                  displayName: Watch list
+                  description: Interested users
+                  order: 3
+                  type: String
+
+                work_end:
+                  displayName: Actual end
+                  order: 39
+                  type: String
+
+                work_notes:
+                  displayName: Work notes
+                  order: 41
+                  type: String
+
+                work_notes_list:
+                  displayName: Work notes list
+                  description: Users interested in work notes
+                  order: 30
+                  type: String
+
+                work_start:
+                  displayName: Actual start
+                  order: 46
+                  type: String
+
+      operationId: CreateRecord
+
+    - kind: SetVariable
+      id: setVariable_ErmffV
+      variable: Topic.TicketUrl
+      value: ="https://icbd.service-now.com/sc_request.do?sys_id=" & Topic.CreateRecord.result.sys_id
+
+    - kind: SendActivity
+      id: sendActivity_j0O15y
+      activity: |-
+        Tu ticket de ServiceNow se creó correctamente.
+
+        - **Número del ticket:**{Topic.CreateRecord.result.task_effective_number}
+        - **Título:**{Topic.CreateRecord.result.short_description}
+        - **Descripción:**{Topic.CreateRecord.result.description}
+        - **Fecha de creación:**{Topic.CreateRecord.result.opened_at}
+
+
+        _Puedes consultar el ticket y hacer seguimiento de su progreso usando el botón de abajo._
+        {Topic.TicketUrl}
+
+    - kind: CancelAllDialogs
+      id: swZMeT
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,148 @@
+mcs.metadata:
+  componentName: Ticket English
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: question_TmUAzs
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.Tipo
+      prompt:
+        text:
+          - 
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "Create an IT Ticket ",
+                    "size": "ExtraLarge",
+                    "horizontalAlignment": "Center",
+                    "weight": "Bolder",
+                    "color": "Accent",
+                    "wrap": true
+                  },
+                  {
+                    "type": "RichTextBlock",
+                    "horizontalAlignment": "Center",
+                    "inlines": [
+                      {
+                        "type": "TextRun",
+                        "text": "Before creating your ticket, please select the type that best describes your situation."
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "items": [
+                      {
+                        "type": "ColumnSet",
+                        "columns": [
+                          {
+                            "type": "Column",
+                            "width": 50,
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "horizontalAlignment": "Center",
+                                "weight": "Bolder",
+                                "size": "Large",
+                                "color": "Accent",
+                                "text": "Incident",
+                                "wrap": true
+                              },
+                              {
+                                "type": "TextBlock",
+                                "horizontalAlignment": "Center",
+                                "text": "An Incident is a problem where something that normally works is not working as expected.",
+                                "wrap": true
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Column",
+                            "width": 50,
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "Request",
+                                "horizontalAlignment": "Center",
+                                "size": "Large",
+                                "color": "Accent",
+                                "weight": "Bolder"
+                              },
+                              {
+                                "type": "TextBlock",
+                                "weight": "Default",
+                                "text": "A Request is when you need something from IT that requires a service, access, equipment, software, or another IT resource.",
+                                "wrap": true,
+                                "horizontalAlignment": "Center"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Container",
+                    "items": [
+                      {
+                        "type": "Image",
+                        "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/3_4%20profile.png?d=wbce7e63344d0444789970fd9198875c3&csf=1&web=1&e=wnauPw",
+                        "width": "200px",
+                        "horizontalAlignment": "Center"
+                      }
+                    ]
+                  }
+                ]
+              }
+
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: INCIDENT
+              displayName: INCIDENT
+
+            - id: REQUEST
+              displayName: REQUEST
+
+            - id: CANCEL
+              displayName: CANCEL
+
+    - kind: ConditionGroup
+      id: conditionGroup_qnZnE5
+      conditions:
+        - id: conditionItem_pAtcU9
+          condition: =Topic.Tipo = 'new_TinaTest.topic.TicketEnglish.main.question_TmUAzs'.INCIDENT
+          actions:
+            - kind: BeginDialog
+              id: 4uWKYr
+              dialog: new_TinaTest.topic.CreateITIncidentEnglishCopy
+
+        - id: conditionItem_4V84fI
+          condition: =Topic.Tipo = 'new_TinaTest.topic.TicketEnglish.main.question_TmUAzs'.REQUEST
+          actions:
+            - kind: BeginDialog
+              id: JfeBhL
+              dialog: new_TinaTest.topic.test
+
+        - id: conditionItem_YyvmvC
+          condition: =Topic.Tipo = 'new_TinaTest.topic.TicketEnglish.main.question_TmUAzs'.CANCEL
+          actions:
+            - kind: EndDialog
+              id: HHvn2L
+
+inputType: {}
+outputType: {}

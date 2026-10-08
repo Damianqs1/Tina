@@ -1,0 +1,46 @@
+mcs.metadata:
+  componentName: "Sign in "
+  description: This system topic triggers when the agent needs to sign in the user or require the user to sign in
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnSignIn
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_ypjGKL
+      conditions:
+        - id: conditionItem_7XYIIR
+          condition: =System.SignInReason = SignInReason.SignInRequired
+          actions:
+            - kind: SendActivity
+              id: sendMessage_1jHUNO
+              activity:
+                attachments:
+                  - kind: AdaptiveCardTemplate
+                    cardContent: |-
+                      {
+                        "type": "AdaptiveCard",
+                        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.5",
+                        "body": [
+                          {
+                            "type": "TextBlock",
+                            "text": "Hello! To be able to help you, I'll need you to sign in.",
+                            "wrap": true,
+                            "horizontalAlignment": "Center",
+                            "size": "ExtraLarge",
+                            "weight": "Bolder"
+                          },
+                          {
+                            "type": "Image",
+                            "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/3_4%20profile.png?d=wbce7e63344d0444789970fd9198875c3&csf=1&web=1&e=T97osn",
+                            "horizontalAlignment": "Center",
+                            "height": "200px"
+                          }
+                        ]
+                      }
+
+    - kind: OAuthInput
+      id: gOjhZA
+      title: Login
+      text: To continue, please login

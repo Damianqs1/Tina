@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: Gatehouse Sober Community
+  description: Official Gatehouse Sober Community website providing information about sober living, recovery housing, community support, and residential services in Nashua, New Hampshire.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.gatehousesobercommunity.com/

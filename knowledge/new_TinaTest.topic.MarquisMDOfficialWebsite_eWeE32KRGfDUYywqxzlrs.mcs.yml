@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: Marquis MD – Official Website
+  description: Official Marquis MD website containing information about concierge primary care and pediatric care, membership levels, services, physician and care team, Concierge Care Coordinator support, preventive care, insurance considerations, locations, careers, frequently asked questions, and contact information. Use this source to answer questions about Marquis MD and its publicly available healthcare services and membership information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://marquismd.com/

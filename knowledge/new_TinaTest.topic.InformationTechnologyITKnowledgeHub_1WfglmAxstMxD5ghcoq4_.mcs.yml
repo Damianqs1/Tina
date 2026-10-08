@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Information Technology – IT Knowledge Hub Intra
+  description: Official SharePoint site for the Information Technology (IT) Department at ABA Centers. This site contains IT support resources, self-service documentation, Standard Operating Procedures (SOPs), knowledge base articles, application guides, onboarding materials, Microsoft Teams and Microsoft 365 instructions, security training resources, IT communications, company structure information, and Dynamic 365 Groups documentation. It also includes self-service resources for applications and services such as Foxit, Okta, Teams, and other company IT tools.  Use this site as a primary source for answering employee questions about IT services, applications, technical procedures, troubleshooting guides, account and access instructions, security training, IT processes, and internal technology resources. Prefer the most relevant and current document available on the site and do not infer procedures that are not documented.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Information-Technology
+  additionalSearchTerms:

@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: MethodContactText
+kind: Variable
+name: MethodContactText
+scope: Conversation
+isExternalInitializationAllowed: false
+isOutputToExternalCallers: false
+initializationTimeoutInMilliseconds: 0

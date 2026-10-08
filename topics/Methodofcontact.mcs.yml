@@ -1,0 +1,142 @@
+mcs.metadata:
+  componentName: Method of contact
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: FtxDfT
+      card: |-
+        ={
+            type: "AdaptiveCard",
+            '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+            version: "1.5",
+
+            body: [
+                {
+                    type: "Container",
+                    items: [
+                        {
+                            type: "TextBlock",
+                            text: "Preferred method of contact",
+                            size: "Large",
+                            weight: "Bolder",
+                            color: "Accent",
+                            horizontalAlignment: "Center",
+                            wrap: true
+                        },
+                        {
+                            type: "TextBlock",
+                            text: "How would you prefer to be contacted?",
+                            size: "Medium",
+                            horizontalAlignment: "Center",
+                            wrap: true,
+                            spacing: "Small"
+                        }
+                    ]
+                },
+
+                {
+                    type: "ColumnSet",
+                    horizontalAlignment: "Center",
+                    spacing: "Medium",
+
+                    columns: [
+                        {
+                            type: "Column",
+                            width: "auto",
+                            items: [
+                                {
+                                    type: "ActionSet",
+                                    actions: [
+                                        {
+                                            type: "Action.Submit",
+                                            title: "Email",
+                                            style: "positive",
+                                            data: {
+                                                actionSubmitId: "Email"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+
+                        {
+                            type: "Column",
+                            width: "auto",
+                            items: [
+                                {
+                                    type: "ActionSet",
+                                    actions: [
+                                        {
+                                            type: "Action.Submit",
+                                            title: "Phone",
+                                            style: "positive",
+                                            data: {
+                                                actionSubmitId: "Phone"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+
+                        {
+                            type: "Column",
+                            width: "auto",
+                            items: [
+                                {
+                                    type: "ActionSet",
+                                    actions: [
+                                        {
+                                            type: "Action.Submit",
+                                            title: "Teams",
+                                            style: "positive",
+                                            data: {
+                                                actionSubmitId: "Teams"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    type: "Image",
+                    url: "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Front.png?d=w37c70da031ef4a2a862941297fd69115&csf=1&web=1&e=u32B8q",
+                    size: "Medium",
+                    horizontalAlignment: "Center",
+                    altText: "Tina",
+                    spacing: "Medium"
+                }
+            ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+
+      outputType:
+        properties:
+          actionSubmitId: String
+
+    - kind: ConditionGroup
+      id: conditionGroup_r2DKFE
+      conditions:
+        - id: conditionItem_ABjD9s
+          condition: =Topic.actionSubmitId = "contact_phone"
+          actions:
+            - kind: Question
+              id: question_yo0AM5
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: init:Topic.PhoneUser
+              prompt: Phone number
+              entity: StringPrebuiltEntity
+
+inputType: {}
+outputType: {}

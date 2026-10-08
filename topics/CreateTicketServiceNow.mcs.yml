@@ -1,0 +1,39 @@
+mcs.metadata:
+  componentName: CreateTicketServiceNow
+  description: Creates a new IT ticket in ServiceNow only when the user explicitly asks to create, open, or submit a new ticket.
+kind: AdaptiveDialog
+modelDescription: |-
+  Use this topic only when the user explicitly asks to create a new IT ticket.
+
+  The user must clearly request ticket creation, such as:
+  "I want to create a ticket" or "Please create an IT ticket."
+
+  Do not use this topic when the user is asking how or where to report an incident, how to get IT support, where to find a support portal, or where to submit a request.
+
+  Do not use this topic for general questions, troubleshooting, support information, or requests that can be answered using the configured Support Portal knowledge.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: BeginDialog
+      id: ofeRIW
+      dialog: new_TinaTest.topic.DetectedLenguage
+
+    - kind: ConditionGroup
+      id: conditionGroup_Qryz0U
+      conditions:
+        - id: conditionItem_upLYIH
+          condition: =Global.Lenguage = "English"
+          actions:
+            - kind: BeginDialog
+              id: sHcPxO
+              dialog: new_TinaTest.topic.TicketEnglish
+
+      elseActions:
+        - kind: BeginDialog
+          id: gDil2I
+          dialog: new_TinaTest.topic.TicketEnglish
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: Billing Workflow Guide – Billing Procedures and SOPs
+  description: |-
+    Description:
+    Official knowledge source containing standard operating procedures and step-by-step workflows for the Billing team. Use this source to answer questions about billing processes, client and claim creation, insurance verification, VOB review, credential reports, CollaborateMD, ABA Connect, Salesforce, invoicing, claim corrections, diagnostic workflows, school billing, and related billing operations. Follow the documented procedures, system steps, validations, and naming conventions provided in this source. Do not invent billing procedures, system steps, requirements, or information that is not documented in this source.
+kind: FileAttachmentComponentMetadata
+triggerCondition: =System.User.Email = "ydiaz@abatechnology.com" && System.User.Email = "dalopez@abatechnology.com"

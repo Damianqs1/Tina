@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: PowerPoints Intra
+  description: This knowledge source provides information found in PowerPoints SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABAMarketingDepartment/PowerPoints
+  additionalSearchTerms:

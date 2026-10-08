@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: HR Knowledge Base – Benefits – COL-Medellin
+  description: Official HR knowledge base containing benefits policies, procedures, guidelines, forms, and employee resources applicable to employees in the COL-Medellin location. This knowledge source is intended exclusively for authorized employees associated with COL-Medellin and should only be used when Global.Country2 is COL-Medellin.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: =Global.Country2 = "COL-Medellin"
+  site: https://abacenter.sharepoint.com/sites/HumanResources/Benefits
+  additionalSearchTerms:

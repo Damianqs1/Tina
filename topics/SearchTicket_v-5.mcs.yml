@@ -1,0 +1,45 @@
+mcs.metadata:
+  componentName: "SearchTicket  "
+kind: AdaptiveDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: TicketNumber
+    name: ServiceNow ticket number
+    description: |-
+      The ServiceNow ticket number to search for. 
+      Extract the ticket number from the user's message or conversation context.
+      Expected format: INC followed by 7 digits, for example INC0010081.
+    shouldPromptUser: true
+    inputSettings:
+      repeatCount: 1
+
+modelDescription: Use this topic when the user wants to search for, find, view, check, or retrieve information about an existing IT ticket in ServiceNow. The user may provide a ServiceNow ticket number.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: BeginDialog
+      id: wIOE0y
+      dialog: new_TinaTest.topic.DetectedLenguage
+
+    - kind: ConditionGroup
+      id: conditionGroup_7el6bx
+      conditions:
+        - id: conditionItem_fsn4pX
+          condition: =Global.Lenguage = "English"
+
+    - kind: EndDialog
+      id: lvqmAv
+
+inputType:
+  properties:
+    TicketNumber:
+      displayName: ServiceNow ticket number
+      description: |-
+        The ServiceNow ticket number to search for. 
+        Extract the ticket number from the user's message or conversation context.
+        Expected format: INC followed by 7 digits, for example INC0010081.
+      type: String
+
+outputType: {}

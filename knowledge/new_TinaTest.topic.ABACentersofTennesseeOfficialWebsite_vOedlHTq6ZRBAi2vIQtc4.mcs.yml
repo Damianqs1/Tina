@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Tennessee – Official Website
+  description: Official ABA Centers of Tennessee website containing information about autism services, autism screening and diagnosis, early intervention, child and teen ABA therapy, in-home and in-school ABA therapy, insurance and benefits, locations, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Tennessee and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacenterstn.com/

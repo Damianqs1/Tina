@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: Contry
+kind: Variable
+name: Contry
+scope: User
+isExternalInitializationAllowed: true
+isOutputToExternalCallers: true
+initializationTimeoutInMilliseconds: 0

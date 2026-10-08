@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: ABa Academy Of Exellence Intra
+  description: Centralized knowledge hub for ABA Academy of Excellence. Contains training and professional development resources, RBT exam and study materials, microlearning courses, supervision documents, caregiver resources, regional Master Trainer information, company resources, forms, benefits, IT support, and FAQs. Use this source to answer employee questions about Academy training, RBT resources, professional development, available resources, and related workplace information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Academy-of-Excellence
+  additionalSearchTerms:

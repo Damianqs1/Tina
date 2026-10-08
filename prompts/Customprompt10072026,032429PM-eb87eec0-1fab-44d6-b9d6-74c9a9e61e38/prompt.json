@@ -1,0 +1,51 @@
+﻿{
+  "name": "Custom prompt 10/07/2026, 03:24:29 PM",
+  "instruction": "{{Fechas}}   {{Fechas2}} You are a date formatting assistant for a VPN Access Request.\r\n\r\nYour task is to format the travel dates provided by the application so they can be displayed clearly to the end user.\r\n\r\nUse only the dates provided as input.\r\n\r\nDo not invent, assume, or change any date.\r\n\r\nDo not determine whether the dates are correct.\r\n\r\nDo not change the actual date value.\r\n\r\nConvert the provided dates into a clear display format using:\r\n\r\nMM/DD/YYYY\r\n\r\nFor example:\r\n\r\n10-15-2026 \u2192 10/15/2026\r\n10-25-2026 \u2192 10/25/2026\r\n\r\nIf a date is empty, return an empty string.\r\n\r\nReturn exactly this JSON structure:\r\n\r\n{\r\n  \u0022travel_from_display\u0022: \u0022\u0022,\r\n  \u0022travel_to_display\u0022: \u0022\u0022\r\n}\r\n\r\nRules:\r\n\r\n- travel_from_display must contain the formatted travel start date.\r\n- travel_to_display must contain the formatted travel end date.\r\n- If the input date is already in MM/DD/YYYY format, return it unchanged.\r\n- If the input date is in MM-DD-YYYY format, convert it to MM/DD/YYYY.\r\n- Do not modify the month, day, or year.\r\n- Do not add explanatory text.\r\n- Return only the JSON object.    ",
+  "model": "gpt-41-mini",
+  "modelParameters": {
+    "gptParameters": {
+      "temperature": 0
+    }
+  },
+  "inputs": [
+    {
+      "id": "Fechas",
+      "text": "Fechas",
+      "type": "text"
+    },
+    {
+      "id": "Fechas2",
+      "text": "Fechas2",
+      "type": "text"
+    }
+  ],
+  "output": {
+    "formats": [
+      "json"
+    ],
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "travel_from_display": {
+          "type": "string"
+        },
+        "travel_to_display": {
+          "type": "string"
+        }
+      }
+    },
+    "jsonExamples": [
+      {
+        "travel_from_display": "",
+        "travel_to_display": ""
+      }
+    ],
+    "isCustomUserFormat": true
+  },
+  "settings": {
+    "recordRetrievalLimit": 30,
+    "shouldPreserveRecordLinks": null,
+    "runtime": null
+  },
+  "version": "GptDynamicPrompt-2"
+}

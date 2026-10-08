@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Puerto Rico – Official Website
+  description: Official ABA Centers of Puerto Rico website containing information about autism services, autism screening and diagnosis, early intervention, ABA therapy for children and adolescents, in-home and school-based ABA therapy, insurance benefits, locations, service areas, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Puerto Rico and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacenterspr.com/

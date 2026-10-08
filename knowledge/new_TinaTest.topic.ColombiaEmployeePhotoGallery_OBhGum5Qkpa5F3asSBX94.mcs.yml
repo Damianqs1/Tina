@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Colombia Employee Photo Gallery
+  description: Fuente oficial interna de SharePoint que contiene fotografías de ABA Centers relacionadas con empleados, actividades, eventos y operaciones realizadas en Colombia.  Utilizar esta fuente para consultas sobre fotografías de empleados en Colombia, eventos internos, actividades corporativas, clínicas y demás contenido visual relacionado con las operaciones de ABA Centers en Colombia.  No utilizar esta fuente para información de empleados que no esté relacionada con fotografías, información de otros países, contenido de marketing externo o galerías de Estados Unidos.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: =Global.Country2 = "COL-Medellin"
+  site: https://abacenter.sharepoint.com/sites/ABATECHCommunications/Shared%20Documents
+  additionalSearchTerms:

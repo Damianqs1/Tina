@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: HR Knowledge Base – Payroll – Colombia
+  description: Official HR knowledge base containing payroll policies, procedures, forms, guidelines, and employee resources applicable to employees in Colombia. This knowledge source is intended exclusively for authorized Colombia-based employees and should only be used when Global.Country2 is CO
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: =Global.Country2 = "COL-Medellin"
+  site: https://abacenter.sharepoint.com/sites/HumanResources/Payroll
+  additionalSearchTerms:

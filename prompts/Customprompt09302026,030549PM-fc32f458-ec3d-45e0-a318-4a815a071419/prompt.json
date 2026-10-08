@@ -1,0 +1,83 @@
+﻿{
+  "name": "Custom prompt 09/30/2026, 03:05:49 PM",
+  "instruction": "You are extracting structured information for a ServiceNow Hardware Request.\r\n\r\nAnalyze the user\u0027s request and return ALL fields defined in the JSON output.\r\n\r\nIMPORTANT:\r\nYou MUST return every field.\r\nNever omit a field.\r\nNever return an empty string.\r\nNever return null.\r\n\r\nUse only information explicitly provided by the user.\r\nDo not invent, assume, or infer information.\r\n\r\nThe output must use the exact values defined below.\r\n\r\nFIELD RULES\r\n\r\n1. quantity\r\n\r\nExtract the quantity explicitly requested.\r\n\r\nIf the user does not specify a quantity, return:\r\n1\r\n\r\n\r\n2. deviceRequestType\r\n\r\nThis field has ONLY two valid values:\r\n\r\n\u0022Net new\u0022\r\n\u0022Replacement\u0022\r\n\r\nIf the user requests a new device, return exactly:\r\n\r\n\u0022Net new\u0022\r\n\r\nIf the user wants to replace an existing device, return exactly:\r\n\r\n\u0022Replacement\u0022\r\n\r\nNever use:\r\n\u0022New device\u0022\r\n\u0022New\u0022\r\n\u0022New Device\u0022\r\n\u0022Replace\u0022\r\n\u0022Replacement device\u0022\r\n\r\nIf the request type cannot be determined, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\n\r\n3. requestedDeviceType\r\n\r\nFor a Net new request:\r\nExtract the type of device requested.\r\n\r\nExamples:\r\nLaptop\r\niPhone\r\niPad\r\n\r\nIf the user does not specify the requested device type, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Replacement request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n4. otherDeviceType\r\n\r\nExtract another device type only when the user explicitly provides one.\r\n\r\nIf no other device type is provided, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n5. deviceBeingReplaced\r\n\r\nFor a Replacement request:\r\nExtract the type of existing device being replaced.\r\n\r\nIf the user does not specify it, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Net new request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n6. replacementReason\r\n\r\nFor a Replacement request:\r\nExtract the explicit reason for replacing the device.\r\n\r\nIf the user does not provide a replacement reason, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Net new request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n7. originalDeviceInPossession\r\n\r\nFor a Replacement request:\r\nDetermine whether the user explicitly states that they still have the original device.\r\n\r\nValid values:\r\n\r\n\u0022Yes\u0022\r\n\u0022No\u0022\r\n\r\nIf the user does not provide this information, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Net new request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n8. deviceStatus\r\n\r\nFor a Replacement request:\r\nExtract whether the device is explicitly described as:\r\n\r\nLost\r\nStolen\r\nBroken\r\nReturned\r\n\r\nReturn the corresponding value.\r\n\r\nIf none of these conditions is explicitly provided, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Net new request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n9. serialNumberOrAssetTag\r\n\r\nExtract the serial number or asset tag only if explicitly provided.\r\n\r\nIf it is not provided, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n10. reasonForDeviceRequest\r\n\r\nFor a Net new request:\r\nExtract the explicit reason why the user needs the device.\r\n\r\nIf the reason is not provided, return:\r\n\r\n\u0022MISSING\u0022\r\n\r\nFor a Replacement request, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\n11. additionalNotes\r\n\r\nExtract any additional information explicitly provided by the user that does not belong to another field.\r\n\r\nIf there are no additional notes, return:\r\n\r\n\u0022N/A\u0022\r\n\r\n\r\nOUTPUT REQUIREMENTS\r\n\r\nReturn ALL 11 fields.\r\n\r\nNever omit a field.\r\n\r\nNever return null.\r\n\r\nNever return an empty string.\r\n\r\nFor fields that do not apply to the request, return exactly:\r\n\r\n\u0022N/A\u0022\r\n\r\nFor applicable fields where the user did not provide the information, return exactly:\r\n\r\n\u0022MISSING\u0022\r\n\r\nUse the exact capitalization and spelling specified above.\r\n\r\nReturn ONLY valid JSON using exactly this structure:\r\n\r\n{\r\n  \u0022quantity\u0022: 1,\r\n  \u0022deviceRequestType\u0022: \u0022Net new\u0022,\r\n  \u0022requestedDeviceType\u0022: \u0022Laptop\u0022,\r\n  \u0022otherDeviceType\u0022: \u0022N/A\u0022,\r\n  \u0022deviceBeingReplaced\u0022: \u0022N/A\u0022,\r\n  \u0022replacementReason\u0022: \u0022N/A\u0022,\r\n  \u0022originalDeviceInPossession\u0022: \u0022N/A\u0022,\r\n  \u0022deviceStatus\u0022: \u0022N/A\u0022,\r\n  \u0022serialNumberOrAssetTag\u0022: \u0022N/A\u0022,\r\n  \u0022reasonForDeviceRequest\u0022: \u0022to work remotely\u0022,\r\n  \u0022additionalNotes\u0022: \u0022N/A\u0022\r\n} / {{UserRequest}} ",
+  "model": "gpt-41-mini",
+  "modelParameters": {
+    "gptParameters": {
+      "temperature": 0
+    }
+  },
+  "inputs": [
+    {
+      "id": "UserRequest",
+      "text": "UserRequest",
+      "type": "text",
+      "quickTestValue": "{{UserRequest}}"
+    }
+  ],
+  "output": {
+    "formats": [
+      "json"
+    ],
+    "jsonSchema": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "number"
+        },
+        "deviceRequestType": {
+          "type": "string"
+        },
+        "requestedDeviceType": {
+          "type": "string"
+        },
+        "otherDeviceType": {
+          "type": "string"
+        },
+        "deviceBeingReplaced": {
+          "type": "string"
+        },
+        "replacementReason": {
+          "type": "string"
+        },
+        "originalDeviceInPossession": {
+          "type": "string"
+        },
+        "deviceStatus": {
+          "type": "string"
+        },
+        "serialNumberOrAssetTag": {
+          "type": "string"
+        },
+        "reasonForDeviceRequest": {
+          "type": "string"
+        },
+        "additionalNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "jsonExamples": [
+      {
+        "quantity": 1,
+        "deviceRequestType": "string",
+        "requestedDeviceType": "string",
+        "otherDeviceType": "string",
+        "deviceBeingReplaced": "string",
+        "replacementReason": "string",
+        "originalDeviceInPossession": "string",
+        "deviceStatus": "string",
+        "serialNumberOrAssetTag": "string",
+        "reasonForDeviceRequest": "string",
+        "additionalNotes": "string"
+      }
+    ],
+    "isCustomUserFormat": true
+  },
+  "settings": {
+    "recordRetrievalLimit": 30,
+    "shouldPreserveRecordLinks": null,
+    "runtime": null
+  },
+  "version": "GptDynamicPrompt-2"
+}

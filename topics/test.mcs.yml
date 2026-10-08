@@ -1,0 +1,1532 @@
+mcs.metadata:
+  componentName: Ticket Request
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: question_HqFQEP
+      interruptionPolicy:
+        allowInterruption: true
+
+      alwaysPrompt: true
+      variable: init:Global.RequestDescription
+      prompt: Please describe what you need help with. Provide as much detail as possible so I can identify the appropriate request type.
+      entity: StringPrebuiltEntity
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_fHXJZp
+      input:
+        binding:
+          UserRequest: =Global.RequestDescription
+
+      output:
+        binding:
+          predictionOutput: Topic.RequestClassification
+
+      aIModelId: 5fc9e962-a9d3-4f52-a895-86dd24ff72b8
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_evb4EM
+      input:
+        binding:
+          UserRequest: =Global.RequestDescription
+
+      output:
+        binding:
+          predictionOutput: Topic.requestType
+
+      aIModelId: 0c1fa420-0a74-4ee5-9ea5-9481d42f047d
+
+    - kind: ConditionGroup
+      id: conditionGroup_validateClassification
+      conditions:
+        - id: conditionItem_classificationEmpty
+          condition: =IsBlank(Topic.RequestClassification.structuredOutput.requestCategory) || IsBlank(Topic.requestType.structuredOutput.requestType)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_classificationFailed
+              activity: I couldn't identify your request type. Please try again with more detail.
+
+            - kind: GotoAction
+              id: goto_classificationRetry
+              actionId: question_HqFQEP
+
+        - id: conditionItem_7lSsoP
+          condition: =Topic.requestType.structuredOutput.requestType = "Accesories Request"
+          actions:
+            - kind: SendActivity
+              id: sendActivity_Bl1rd0
+              activity:
+                attachments:
+                  - kind: AdaptiveCardTemplate
+                    cardContent: |-
+                      ={
+                          type: "AdaptiveCard",
+                          '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                          version: "1.5",
+
+                          body: [
+
+                              {
+                                  type: "TextBlock",
+                                  text: "IT Equipment Purchase",
+                                  size: "ExtraLarge",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Medium"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "How to purchase IT equipment",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Follow these steps to submit your IT equipment request through the IT Purchase Catalog.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Medium"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Open Coupa",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Large"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Go to Okta and open Coupa from the dashboard.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Open the IT Purchase Catalog",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Large"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "From the Coupa home page, select Purchase Orders and then IT Purchase Catalog.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Find your equipment",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Large"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Search for the equipment you need or browse the available IT catalog.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Add to Cart",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Large"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Select the item, enter the quantity, and click Add to Cart.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Complete your request",
+                                  size: "Medium",
+                                  weight: "Bolder",
+                                  color: "Accent",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Large"
+                              },
+
+                              {
+                                  type: "TextBlock",
+                                  text: "Open your Shopping Cart and follow the Coupa checkout process to submit your request.",
+                                  horizontalAlignment: "Center",
+                                  wrap: true,
+                                  spacing: "Small"
+                              },
+
+                              {
+                                  type: "Container",
+                                  style: "emphasis",
+                                  spacing: "Large",
+                                  items: [
+
+                                      {
+                                          type: "TextBlock",
+                                          text: "Important",
+                                          size: "Medium",
+                                          weight: "Bolder",
+                                          color: "Accent",
+                                          horizontalAlignment: "Center",
+                                          wrap: true
+                                      },
+
+                                      {
+                                          type: "TextBlock",
+                                          text: "IT equipment purchases should be submitted through the IT Purchase Catalog. Do not send equipment requests directly to the IT team.",
+                                          horizontalAlignment: "Center",
+                                          wrap: true,
+                                          spacing: "Small"
+                                      }
+
+                                  ]
+                              },
+
+                              {
+                                  type: "Image",
+                                  url: "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/3_4%20profile.png?d=wbce7e63344d0444789970fd9198875c3&csf=1&web=1&e=MulMoD",
+                                  altText: "Tina",
+                                  size: "Medium",
+                                  horizontalAlignment: "Center",
+                                  spacing: "Large"
+                              }
+
+                          ]
+                      }
+
+            - kind: EndDialog
+              id: o4L7Ua
+
+        - id: conditionItem_80XUUC
+          condition: =Topic.requestType.structuredOutput.requestType = "Data / Report Request"
+          actions:
+            - kind: SendActivity
+              id: sendActivity_je4cfI
+              activity:
+                attachments:
+                  - kind: AdaptiveCardTemplate
+                    cardContent: |-
+                      {
+                        "type": "AdaptiveCard",
+                        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.5",
+                        "body": [
+                          {
+                            "type": "TextBlock",
+                            "text": "Data / Report Request",
+                            "size": "ExtraLarge",
+                            "weight": "Bolder",
+                            "color": "Accent",
+                            "horizontalAlignment": "Center",
+                            "wrap": true,
+                            "spacing": "Medium"
+                          },
+                          {
+                            "type": "TextBlock",
+                            "text": "To request the creation, modification, or extraction of data reports or dashboards.",
+                            "size": "Medium",
+                            "horizontalAlignment": "Center",
+                            "wrap": true,
+                            "spacing": "Small"
+                          },
+                          {
+                            "type": "Container",
+                            "spacing": "Medium",
+                            "separator": true,
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "To request the creation, modification, or extraction of data reports for business or operational use, please fill out this form:",
+                                "horizontalAlignment": "Center",
+                                "wrap": true,
+                                "spacing": "Medium"
+                              },
+                              {
+                                "type": "ColumnSet",
+                                "horizontalAlignment": "Center",
+                                "spacing": "Medium",
+                                "columns": [
+                                  {
+                                    "type": "Column",
+                                    "width": "stretch"
+                                  },
+                                  {
+                                    "type": "Column",
+                                    "width": "auto",
+                                    "items": [
+                                      {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                          {
+                                            "type": "Action.OpenUrl",
+                                            "title": "Data Report Request",
+                                            "style": "positive",
+                                            "url": "https://form.asana.com/?k=WHN53E6uZptLyRImJYiD1w&d=1189282214449536"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "Column",
+                                    "width": "stretch"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "TextBlock",
+                            "text": "And the BI Team will be glad to assist you!",
+                            "size": "Medium",
+                            "weight": "Bolder",
+                            "horizontalAlignment": "Center",
+                            "wrap": true,
+                            "spacing": "Large"
+                          },
+                          {
+                            "type": "Image",
+                            "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/3_4%20profile.png?d=wbce7e63344d0444789970fd9198875c3&csf=1&web=1&e=MulMoD",
+                            "altText": "Tina",
+                            "size": "Medium",
+                            "horizontalAlignment": "Center",
+                            "spacing": "Large"
+                          }
+                        ]
+                      }
+
+            - kind: EndDialog
+              id: iOYtc3
+
+    - kind: AdaptiveCardPrompt
+      id: i5SXSE
+      card: |-
+        ={
+          '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+          type: "AdaptiveCard",
+          version: "1.5",
+
+          body: [
+            {
+              type: "TextBlock",
+              text: "Create IT Request",
+              size: "Large",
+              weight: "Bolder",
+              color: "Accent",
+              horizontalAlignment: "Center",
+              wrap: true
+            },
+            {
+              type: "TextBlock",
+              text: "Please review the information before creating your request.",
+              horizontalAlignment: "Center",
+              wrap: true,
+              spacing: "Medium"
+            },
+            {
+              type: "TextBlock",
+              text: "Category",
+              weight: "Bolder",
+              horizontalAlignment: "Center",
+              spacing: "Medium"
+            },
+            {
+              type: "TextBlock",
+              text: Coalesce(Topic.RequestClassification.structuredOutput.requestCategory, "N/A"),
+              horizontalAlignment: "Center",
+              wrap: true
+            },
+            {
+              type: "TextBlock",
+              text: "Request Type",
+              weight: "Bolder",
+              horizontalAlignment: "Center",
+              spacing: "Medium"
+            },
+            {
+              type: "TextBlock",
+              text: Coalesce(Topic.requestType.structuredOutput.requestType, "N/A"),
+              horizontalAlignment: "Center",
+              wrap: true
+            },
+            {
+              type: "TextBlock",
+              text: "Description",
+              weight: "Bolder",
+              horizontalAlignment: "Center",
+              spacing: "Medium"
+            },
+            {
+              type: "TextBlock",
+              text: Coalesce(Global.RequestDescription, "N/A"),
+              horizontalAlignment: "Center",
+              wrap: true
+            },
+            {
+              type: "TextBlock",
+              text: "Is this information correct?",
+              weight: "Bolder",
+              horizontalAlignment: "Center",
+              spacing: "Medium"
+            },
+            {
+              type: "ActionSet",
+              actions: [
+                {
+                  type: "Action.Submit",
+                  title: "Confirm",
+                  style: "positive",
+                  data: {
+                    actionSubmitId: "ticket_confirmation_confirm"
+                  }
+                },
+                {
+                  type: "Action.Submit",
+                  title: "Change",
+                  style: "default",
+                  data: {
+                    actionSubmitId: "ticket_confirmation_change"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      output:
+        binding:
+          action: Topic.action
+          actionSubmitId: Topic.ConfirmationResult
+
+      outputType:
+        properties:
+          action: String
+          actionSubmitId: String
+
+    - kind: ConditionGroup
+      id: conditionGroup_NYTrSY
+      conditions:
+        - id: conditionItem_YsT5o6
+          condition: =Topic.ConfirmationResult = "ticket_confirmation_confirm"
+          actions:
+            - kind: AdaptiveCardPrompt
+              id: FwL4p4
+              card: |-
+                ={
+                    type: "AdaptiveCard",
+                    '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                    version: "1.5",
+
+                    body: [
+                        {
+                            type: "TextBlock",
+                            text: "Preferred method of contact",
+                            size: "Large",
+                            weight: "Bolder",
+                            color: "Accent",
+                            horizontalAlignment: "Center",
+                            wrap: true
+                        },
+
+                        {
+                            type: "TextBlock",
+                            text: "How would you prefer to be contacted?",
+                            size: "Medium",
+                            horizontalAlignment: "Center",
+                            wrap: true,
+                            spacing: "Small"
+                        },
+
+                        {
+                            type: "ColumnSet",
+                            spacing: "Medium",
+                            columns: [
+
+                                {
+                                    type: "Column",
+                                    width: "stretch"
+                                },
+
+                                {
+                                    type: "Column",
+                                    width: "auto",
+                                    items: [
+                                        {
+                                            type: "ActionSet",
+                                            actions: [
+                                                {
+                                                    type: "Action.Submit",
+                                                    title: "Email",
+                                                    style: "positive",
+                                                    data: {
+                                                        actionSubmitId: "email"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+
+                                {
+                                    type: "Column",
+                                    width: "auto",
+                                    items: [
+                                        {
+                                            type: "ActionSet",
+                                            actions: [
+                                                {
+                                                    type: "Action.Submit",
+                                                    title: "Phone",
+                                                    style: "positive",
+                                                    data: {
+                                                        actionSubmitId: "phone"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+
+                                {
+                                    type: "Column",
+                                    width: "auto",
+                                    items: [
+                                        {
+                                            type: "ActionSet",
+                                            actions: [
+                                                {
+                                                    type: "Action.Submit",
+                                                    title: "Teams",
+                                                    style: "positive",
+                                                    data: {
+                                                        actionSubmitId: "teams"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+
+                                {
+                                    type: "Column",
+                                    width: "stretch"
+                                }
+                            ]
+                        },
+
+                        {
+                            type: "Image",
+                            url: "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Front.png?d=w37c70da031ef4a2a862941297fd69115&csf=1&web=1&e=u32B8q",
+                            size: "Medium",
+                            horizontalAlignment: "Center",
+                            altText: "Tina",
+                            spacing: "Medium"
+                        }
+                    ]
+                }
+              output:
+                binding:
+                  actionSubmitId: Global.MethodContact
+
+              outputType:
+                properties:
+                  actionSubmitId: String
+
+            - kind: ConditionGroup
+              id: conditionGroup_6TA5to
+              conditions:
+                - id: conditionItem_Wr2Bec
+                  condition: =Global.MethodContact = "phone"
+                  actions:
+                    - kind: Question
+                      id: question_9zqj9r
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      alwaysPrompt: true
+                      variable: Global.Phone
+                      prompt: Enter your phone number.
+                      entity: StringPrebuiltEntity
+
+            - kind: ConditionGroup
+              id: conditionGroup_sGDUCj
+              conditions:
+                - id: conditionItem_CVyGq2
+                  condition: =Topic.requestType.structuredOutput.requestType = "Hardware Request"
+                  actions:
+                    - kind: InvokeAIBuilderModelAction
+                      id: invokeAIBuilderModelAction_AuBNj1
+                      input:
+                        binding:
+                          UserRequest: =Global.RequestDescription
+
+                      output:
+                        binding:
+                          predictionOutput: Topic.HardwareRequestData
+
+                      aIModelId: fc32f458-ec3d-45e0-a318-4a815a071419
+
+                    - kind: SetVariable
+                      id: setVar_isReplacement
+                      variable: Topic.IsReplacement
+                      value: =Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.deviceRequestType, "")) = "replacement"
+
+                    - kind: SetVariable
+                      id: setVar_newOrExisting
+                      variable: Topic.NewOrExisting
+                      value: =Lower(Substitute(Coalesce(Topic.HardwareRequestData.structuredOutput.deviceRequestType, ""), " ", "_"))
+
+                    - kind: BeginDialog
+                      id: W8Ap8L
+                      input:
+                        binding:
+                          TopicServiceNowUserSysId: ServiceNowID
+
+                      dialog: new_TinaTest.topic.Untitled_ntK
+                      output:
+                        binding:
+                          TopicServiceNowUserSysId: Topic.TopicServiceNowUserSysId
+
+                    - kind: InvokeConnectorAction
+                      id: invokeConnectorAction_ML98r0
+                      latencyMessageSettings:
+                        allowLatencyMessage: false
+
+                      input:
+                        binding:
+                          sys_id: 9dcedf8a3b7b2250255d821f23e45ad4
+                          sysparm_quantity: 1
+                          sysparm_requested_for: =Topic.TopicServiceNowUserSysId
+                          variables: "={additional_notes: Coalesce(Topic.HardwareRequestData.structuredOutput.additionalNotes, \"\"), confirm_information: \"true\", device_in_possession: If(Topic.IsReplacement, Coalesce(Topic.HardwareRequestData.structuredOutput.originalDeviceInPossession, \"No\"), \"No\"), new_device_reason: If(Topic.IsReplacement, \"\", Coalesce(Topic.HardwareRequestData.structuredOutput.reasonForDeviceRequest, \"\")), new_device_type: If(Topic.IsReplacement, \"\", Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.requestedDeviceType, \"\"))), new_or_existing: Topic.NewOrExisting, phone_number: Global.Phone, preferred_method_of_contact: Lower(Global.MethodContact), replacement_device_other: If(Topic.IsReplacement && Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.deviceBeingReplaced, \"\")) = \"other\", Coalesce(Topic.HardwareRequestData.structuredOutput.otherDeviceType, \"\"), \"\"), replacement_device_type: If(Topic.IsReplacement, Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.deviceBeingReplaced, \"other\")), \"other\"), replacement_lost_stolen_broken_or_returned: If(Topic.IsReplacement && Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.originalDeviceInPossession, \"\")) = \"no\", Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.deviceStatus, \"returned\")), \"returned\"), replacement_reason: If(Topic.IsReplacement, Coalesce(Topic.HardwareRequestData.structuredOutput.replacementReason, \"N/A\"), \"N/A\"), requested_by: System.User.DisplayName, requested_for: Topic.TopicServiceNowUserSysId, serial_or_asset_tag: If(Topic.IsReplacement && Lower(Coalesce(Topic.HardwareRequestData.structuredOutput.originalDeviceInPossession, \"\")) = \"yes\", Coalesce(Topic.HardwareRequestData.structuredOutput.serialNumberOrAssetTag, \"\"), \"\")}"
+
+                      output:
+                        kind: SingleVariableOutputBinding
+                        variable: Topic.OrderItem
+
+                      connectionReference: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+                      connectionProperties:
+                        mode: Maker
+
+                      dynamicInputSchema:
+                        properties:
+                          sys_id:
+                            displayName: Item ID
+                            description: The sys_id of the catalog item to order
+                            isRequired: true
+                            order: 0
+                            dynamicValuesConfig:
+                              capability: List
+
+                            type: String
+
+                          sysparm_quantity:
+                            displayName: Quantity
+                            description: Number of items to order.
+                            isRequired: true
+                            order: 1
+                            type: Number
+
+                          sysparm_requested_for:
+                            displayName: User Requested for
+                            description: User for which the item is ordered for.
+                            order: 2
+                            dynamicValuesConfig:
+                              capability: List
+
+                            type: String
+
+                          variables:
+                            displayName: Order Item Body
+                            description: variables array
+                            order: 3
+                            type:
+                              kind: Record
+                              properties:
+                                additional_notes:
+                                  displayName: Additional notes
+                                  order: 13
+                                  type: String
+
+                                attachment_mandatory:
+                                  order: 14
+                                  type: String
+
+                                device_in_possession:
+                                  displayName: Is the original device still in your possession?
+                                  isRequired: true
+                                  order: 8
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Yes
+                                    - No
+                                  enumValues:
+                                    - 
+                                    - Yes
+                                    - No
+                                  type: String
+
+                                new_device_reason:
+                                  displayName: Reason for device request
+                                  order: 12
+                                  type: String
+
+                                new_device_type:
+                                  displayName: What type of device are you requesting?
+                                  order: 11
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Laptop
+                                    - iPhone
+                                    - iPad
+                                  enumValues:
+                                    - 
+                                    - laptop
+                                    - iphone
+                                    - ipad
+                                  type: String
+
+                                new_or_existing:
+                                  displayName: Are you requesting a net new device or replacement of an existing device?
+                                  isRequired: true
+                                  order: 4
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Net new
+                                    - Replacement
+                                  enumValues:
+                                    - 
+                                    - net_new
+                                    - replacement
+                                  type: String
+
+                                phone_number:
+                                  displayName: Phone number
+                                  order: 3
+                                  type: String
+
+                                preferred_method_of_contact:
+                                  displayName: "Preferred method of contact:"
+                                  isRequired: true
+                                  order: 2
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Phone
+                                    - Email
+                                    - Teams
+                                  enumValues:
+                                    - 
+                                    - phone
+                                    - email
+                                    - teams
+                                  type: String
+
+                                replacement_device_other:
+                                  displayName: "Other device type:"
+                                  order: 6
+                                  type: String
+
+                                replacement_device_type:
+                                  displayName: What type of device are you replacing?
+                                  isRequired: true
+                                  order: 5
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Laptop
+                                    - iPhone
+                                    - iPad
+                                    - Other
+                                  enumValues:
+                                    - 
+                                    - laptop
+                                    - iphone
+                                    - ipad
+                                    - other
+                                  type: String
+
+                                replacement_lost_stolen_broken_or_returned:
+                                  displayName: Was the device lost, stolen, broken, or returned?
+                                  isRequired: true
+                                  order: 9
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Lost
+                                    - Stolen
+                                    - Broken
+                                    - Returned
+                                  enumValues:
+                                    - 
+                                    - lost
+                                    - stolen
+                                    - broken
+                                    - returned
+                                  type: String
+
+                                replacement_reason:
+                                  displayName: Reason for replacement
+                                  isRequired: true
+                                  order: 7
+                                  type: String
+
+                                requested_by:
+                                  displayName: Requested by
+                                  order: 0
+                                  dynamicValuesConfig:
+                                    capability: List
+
+                                  type: String
+
+                                requested_for:
+                                  displayName: Requested for
+                                  isRequired: true
+                                  order: 1
+                                  type: String
+
+                                serial_or_asset_tag:
+                                  displayName: Serial number or asset tag of original device
+                                  order: 10
+                                  type: String
+
+                      requestTimeoutInMilliseconds: 30000
+                      operationId: OrderItem
+
+                    - kind: SetVariable
+                      id: setVar_ticketNumber
+                      variable: Topic.TicketNumber
+                      value: =Coalesce(Topic.OrderItem.result.request_number, Topic.OrderItem.result.number, "")
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_rby7xI
+                      conditions:
+                        - id: conditionItem_orderOk
+                          condition: =!IsBlank(Topic.TicketNumber)
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_7kzfPu
+                              activity:
+                                attachments:
+                                  - kind: AdaptiveCardTemplate
+                                    cardContent: |-
+                                      ={
+                                          type: "AdaptiveCard",
+                                          '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                                          version: "1.5",
+
+                                          body: [
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Hardware Request Created",
+                                                  size: "ExtraLarge",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Your hardware request was created successfully.",
+                                                  size: "Medium",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Small"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Request Information",
+                                                  size: "Large",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Large"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Ticket Number",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: Coalesce(
+                                                      Topic.TicketNumber,
+                                                      "N/A"
+                                                  ),
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Requested For",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: Coalesce(
+                                                      System.User.DisplayName,
+                                                      "N/A"
+                                                  ),
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Request Type",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: Coalesce(
+                                                      Topic.NewOrExisting,
+                                                      "N/A"
+                                                  ),
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Preferred Method of Contact",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: Coalesce(
+                                                      Global.MethodContact,
+                                                      "N/A"
+                                                  ),
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Phone Number",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Medium"
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: Coalesce(
+                                                      Global.Phone,
+                                                      "N/A"
+                                                  ),
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Open your request",
+                                                  size: "Medium",
+                                                  weight: "Bolder",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Large"
+                                              },
+
+                                              {
+                                                  type: "ColumnSet",
+                                                  horizontalAlignment: "Center",
+                                                  spacing: "Medium",
+
+                                                  columns: [
+
+                                                      {
+                                                          type: "Column",
+                                                          width: "stretch",
+                                                          items: []
+                                                      },
+
+                                                      {
+                                                          type: "Column",
+                                                          width: "auto",
+                                                          items: [
+
+                                                              {
+                                                                  type: "ActionSet",
+                                                                  horizontalAlignment: "Center",
+
+                                                                  actions: [
+
+                                                                      {
+                                                                          type: "Action.OpenUrl",
+                                                                          title: "Open Ticket",
+                                                                          url: "https://icbd.service-now.com/now/nav/ui/classic/params/target/sc_request.do%3Fsys_id%3D1a10474d47730b503311db59116d4342%26sysparm_record_list%3Dsys_idINjavascript%253AgetMyRequestIDs%2528%2529%255EORDERBYnumber%26sysparm_record_row%3D2%26sysparm_record_rows%3D2%26sysparm_record_target%3Dtask%26sysparm_view%3Dmy_request"
+                                                                      }
+
+                                                                  ]
+                                                              }
+
+                                                          ]
+                                                      },
+
+                                                      {
+                                                          type: "Column",
+                                                          width: "stretch",
+                                                          items: []
+                                                      }
+
+                                                  ]
+                                              }
+
+                                          ]
+                                      }
+
+                      elseActions:
+                        - kind: SendActivity
+                          id: sendActivity_fELrkq
+                          activity: Sorry, I couldn't create your request in ServiceNow. Please try again later or contact the IT team.
+
+                - id: conditionItem_21iTeR
+                  condition: =Topic.requestType.structuredOutput.requestType = "Dashboard Access Request"
+                  actions:
+                    - kind: InvokeAIBuilderModelAction
+                      id: invokeAIBuilderModelAction_8rzeZp
+                      input:
+                        binding:
+                          UserRequest: =Global.RequestDescription
+
+                      output:
+                        binding:
+                          predictionOutput: Topic.DeshbortAccesRequest
+
+                      aIModelId: b469592a-c6c3-43ea-90a5-2cce5a316284
+
+                    - kind: BeginDialog
+                      id: XjkKrH
+                      input:
+                        binding:
+                          TopicServiceNowUserSysId: IdServiceNow
+
+                      dialog: new_TinaTest.topic.Untitled_ntK
+                      output:
+                        binding:
+                          TopicServiceNowUserSysId: Topic.TopicServiceNowUserSysId
+
+                    - kind: InvokeConnectorAction
+                      id: invokeConnectorAction_Vs9DWK
+                      input:
+                        binding:
+                          sys_id: 30d4c3823bdb8310255d821f23e45a1c
+                          sysparm_quantity: 1
+                          sysparm_requested_for: =Topic.TopicServiceNowUserSysId
+                          variables: "={bussiness_justification: Topic.DeshbortAccesRequest.structuredOutput.businessJustification, if_dashboard_is_not_in_the_list: Topic.DeshbortAccesRequest.structuredOutput.dashboardLink, manager_approval: Topic.DeshbortAccesRequest.structuredOutput.approvalEvidence, phone_number: Global.Phone, please_select_the_dashboard_that_you_would_like_to_access: Topic.DeshbortAccesRequest.structuredOutput.dashboardName, preferred_method_of_contact: Global.MethodContact, requested_by: Topic.TopicServiceNowUserSysId, requested_for: Topic.TopicServiceNowUserSysId}"
+
+                      output:
+                        kind: SingleVariableOutputBinding
+                        variable: Topic.OrderItem
+
+                      connectionReference: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+                      connectionProperties:
+                        mode: Maker
+
+                      dynamicInputSchema:
+                        properties:
+                          sys_id:
+                            displayName: Item ID
+                            description: The sys_id of the catalog item to order
+                            isRequired: true
+                            order: 0
+                            dynamicValuesConfig:
+                              capability: List
+
+                            type: String
+
+                          sysparm_quantity:
+                            displayName: Quantity
+                            description: Number of items to order.
+                            isRequired: true
+                            order: 1
+                            type: Number
+
+                          sysparm_requested_for:
+                            displayName: User Requested for
+                            description: User for which the item is ordered for.
+                            order: 2
+                            dynamicValuesConfig:
+                              capability: List
+
+                            type: String
+
+                          variables:
+                            displayName: Order Item Body
+                            description: variables array
+                            order: 3
+                            type:
+                              kind: Record
+                              properties:
+                                bussiness_justification:
+                                  displayName: Please explain the bussiness justification
+                                  isRequired: true
+                                  order: 6
+                                  type: String
+
+                                if_dashboard_is_not_in_the_list:
+                                  displayName: If the Dashboard is not in the list, please specify or share the link.
+                                  order: 5
+                                  type: String
+
+                                manager_approval:
+                                  displayName: Please attach the Dashboard Owner's approval or Manager's approval if it is not listed.
+                                  isRequired: true
+                                  order: 7
+                                  type: String
+
+                                phone_number:
+                                  displayName: Phone number
+                                  order: 3
+                                  type: String
+
+                                please_select_the_dashboard_that_you_would_like_to_access:
+                                  displayName: "Please select the Dashboard that you would like to access:"
+                                  isRequired: true
+                                  order: 4
+                                  dynamicValuesConfig:
+                                    capability: List
+
+                                  type: String
+
+                                preferred_method_of_contact:
+                                  displayName: "Preferred method of contact:"
+                                  isRequired: true
+                                  order: 2
+                                  enumDisplayNames:
+                                    - -- None --
+                                    - Phone
+                                    - Email
+                                    - Teams
+                                  enumValues:
+                                    - 
+                                    - phone
+                                    - email
+                                    - teams
+                                  type: String
+
+                                requested_by:
+                                  displayName: Requested by
+                                  order: 0
+                                  dynamicValuesConfig:
+                                    capability: List
+
+                                  type: String
+
+                                requested_for:
+                                  displayName: Requested for
+                                  isRequired: true
+                                  order: 1
+                                  type: String
+
+                      operationId: OrderItem
+
+                    - kind: SetVariable
+                      id: setVariable_6pZ6al
+                      variable: Topic.TicktNumber
+                      value: =Topic.OrderItem.result.sys_id
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_jA2SKa
+                      conditions:
+                        - id: conditionItem_wJ2yQh
+                          condition: =!IsBlank(Topic.OrderItem.result)
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_Cc6Cfp
+                              activity:
+                                text:
+                                  - 
+                                attachments:
+                                  - kind: AdaptiveCardTemplate
+                                    cardContent: |-
+                                      ={
+                                          '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                                          type: "AdaptiveCard",
+                                          version: "1.5",
+
+                                          body: [
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Access Request Created",
+                                                  size: "Large",
+                                                  weight: "Bolder",
+                                                  color: "Accent",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true
+                                              },
+
+                                              {
+                                                  type: "TextBlock",
+                                                  text: "Your request has been successfully created in ServiceNow.",
+                                                  size: "Medium",
+                                                  horizontalAlignment: "Center",
+                                                  wrap: true,
+                                                  spacing: "Small"
+                                              },
+
+                                              {
+                                                  type: "Container",
+                                                  style: "emphasis",
+                                                  spacing: "Medium",
+                                                  items: [
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Request Number",
+                                                          size: "Medium",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.OrderItem.result.number,
+                                                              Topic.OrderItem.result.request_number,
+                                                              "N/A"
+                                                          ),
+                                                          size: "Large",
+                                                          weight: "Bolder",
+                                                          color: "Accent",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Category",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Data & Analytics",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Request Type",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.requestType.structuredOutput.requestType,
+                                                              "Access Request"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Requested For",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              System.User.Email,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Preferred Contact",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Global.MethodContact,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      }
+                                                  ]
+                                              },
+
+                                              {
+                                                  type: "Container",
+                                                  spacing: "Medium",
+                                                  items: [
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Description",
+                                                          size: "Medium",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Global.RequestDescription,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      }
+                                                  ]
+                                              },
+
+                                              {
+                                                  type: "Container",
+                                                  spacing: "Medium",
+                                                  items: [
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Dashboard Access Details",
+                                                          size: "Medium",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Dashboard",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.DeshbortAccesRequest.structuredOutput.dashboardName,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Business Justification",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.DeshbortAccesRequest.structuredOutput.businessJustification,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Approval",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.DeshbortAccesRequest.structuredOutput.approvalEvidence,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: "Dashboard Link",
+                                                          weight: "Bolder",
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Medium"
+                                                      },
+
+                                                      {
+                                                          type: "TextBlock",
+                                                          text: Coalesce(
+                                                              Topic.DeshbortAccesRequest.structuredOutput.dashboardLink,
+                                                              "N/A"
+                                                          ),
+                                                          horizontalAlignment: "Center",
+                                                          wrap: true,
+                                                          spacing: "Small"
+                                                      }
+                                                  ]
+                                              },
+
+                                              {
+                                                  type: "ColumnSet",
+                                                  spacing: "Medium",
+                                                  columns: [
+                                                      {
+                                                          type: "Column",
+                                                          width: "stretch"
+                                                      },
+
+                                                      {
+                                                          type: "Column",
+                                                          width: "auto",
+                                                          items: [
+                                                              {
+                                                                  type: "ActionSet",
+                                                                  actions: [
+                                                                      {
+                                                                          type: "Action.OpenUrl",
+                                                                          title: "Open Ticket",
+                                                                          style: "positive",
+                                                                          url: Concatenate(
+                                                                              "https://icbd.service-now.com/now/nav/ui/classic/params/target/sc_request.do%3Fsys_id%3D",
+                                                                              Topic.OrderItem.result.sys_id,
+                                                                              "%26sysparm_view%3Dmy_request%26sysparm_record_target%3Dtask%26sysparm_record_row%3D1%26sysparm_record_rows%3D1%26sysparm_record_list%3Dsys_idINjavascript%253AgetMyRequestIDs%2528%2529%255EORDERBYnumber%26sysparm_view%3Dmy_request"
+                                                                          )
+                                                                      }
+                                                                  ]
+                                                              }
+                                                          ]
+                                                      },
+
+                                                      {
+                                                          type: "Column",
+                                                          width: "stretch"
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                      }
+
+                      elseActions:
+                        - kind: SendActivity
+                          id: sendActivity_Mxy2Sj
+                          activity: |-
+                            Sorry, I couldn't create your request in ServiceNow. Please try again later or contact the IT team. 
+                            {Topic.TicktNumber}
+
+                - id: conditionItem_brkAcv
+                  condition: =Topic.requestType.structuredOutput.requestType = "VPN Access Request"
+                  actions:
+                    - kind: BeginDialog
+                      id: 9OdzF1
+                      dialog: new_TinaTest.topic.ticket_request_vpnAcces
+
+              elseActions:
+                - kind: SendActivity
+                  id: sendActivity_notImplemented
+                  activity: This request type ({Topic.requestType.structuredOutput.requestType}) isn't automated yet. Please contact the IT team directly.
+
+        - id: conditionItem_changeRequest
+          condition: =Topic.ConfirmationResult = "ticket_confirmation_change"
+          actions:
+            - kind: GotoAction
+              id: goto_changeRequest
+              actionId: question_HqFQEP
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_rL9Ium
+          activity: Request cancelled. Let me know if you need anything else.
+
+    - kind: CancelAllDialogs
+      id: 3rUZZh
+
+    - kind: EndDialog
+      id: J2jAcn
+
+inputType: {}
+outputType: {}

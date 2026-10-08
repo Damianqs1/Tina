@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Georgia – Official Website
+  description: Official ABA Centers of Georgia website containing information about autism diagnosis and testing, early intervention, ABA therapy for children and teens, in-home and in-school ABA therapy, insurance benefits, locations, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Georgia and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacentersga.com/

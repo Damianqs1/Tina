@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: UserDescription
+kind: Variable
+name: UserDescription
+scope: User
+isExternalInitializationAllowed: false
+isOutputToExternalCallers: true
+initializationTimeoutInMilliseconds: 0

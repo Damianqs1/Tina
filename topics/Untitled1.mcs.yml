@@ -1,0 +1,36 @@
+mcs.metadata:
+  componentName: CountryUser
+kind: AdaptiveDialog
+modelDescription: Test Contry
+beginDialog:
+  kind: OnActivity
+  id: main
+  condition: =IsBlank(Global.Country2) && IsBlank(Global.Country)
+  actions:
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_LUmZmM
+      latencyMessageSettings:
+        allowLatencyMessage: false
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.MyProfile_V2
+
+      connectionReference: new_TinaTest.shared_office365users.shared-office365user-f9fb9993-c21a-4835-99aa-445dd5a52835
+      connectionProperties:
+        mode: Maker
+
+      operationId: MyProfile_V2
+
+    - kind: SetVariable
+      id: setVariable_jZxyz6
+      variable: Global.Country2
+      value: =Topic.MyProfile_V2.officeLocation
+
+    - kind: SetVariable
+      id: setVariable_pkScfE
+      variable: Global.Country
+      value: =Topic.MyProfile_V2.country
+
+inputType: {}
+outputType: {}

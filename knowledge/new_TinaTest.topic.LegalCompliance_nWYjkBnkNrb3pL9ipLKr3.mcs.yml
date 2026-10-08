@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Legal & Compliance Intra
+  description: Centralized knowledge hub for Legal & Compliance. Contains company policies, SOPs, compliance programs and training, organizational forms, incident reporting resources, the Employee Compliance Hotline, and guidance related to legal, regulatory, ethical, and compliance matters. Use this source to answer employee questions about policies, procedures, compliance requirements, incident reporting, reporting concerns, organizational forms, ethical conduct, and related Legal & Compliance resources.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Legal
+  additionalSearchTerms:

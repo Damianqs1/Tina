@@ -1,0 +1,13 @@
+mcs.metadata:
+  componentName: Subcategory
+  description: Select the most appropriate subcategory based on ProblemDescription and Category.
+kind: ClosedListEntity
+items:
+  - id: 2vlMRO
+    displayName: Antivirus
+
+  - id: cM3QuA
+    displayName: Email
+
+  - id: ichvqD
+    displayName: Internal Application

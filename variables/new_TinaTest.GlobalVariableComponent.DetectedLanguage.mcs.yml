@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: DetectedLanguage
+kind: Variable
+name: DetectedLanguage
+scope: User
+isExternalInitializationAllowed: false
+isOutputToExternalCallers: true
+initializationTimeoutInMilliseconds: 0

@@ -1,0 +1,5 @@
+mcs.metadata:
+  componentName: ICBD Support Portal Catalog – COL
+  description: Official ICBD Colombia Support Portal catalog. Use this knowledge source to answer questions about IT support portals, available services, where to report incidents, where to submit requests, ticket forms, support channels, and routing guidance. Use it when the user is looking for information or instructions about how or where to obtain IT support. Do not use it to create or submit a ticket.
+kind: FileAttachmentComponentMetadata
+triggerCondition: =Global.Country2 = "COL-Medellin"

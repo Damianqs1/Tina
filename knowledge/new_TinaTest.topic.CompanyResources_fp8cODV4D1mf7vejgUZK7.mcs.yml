@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Company Resources Intra
+  description: Centralized knowledge hub for company-wide employee resources. Contains information and resources related to payroll, company structure, professional services, security training, clinical resources, standard operating procedures (SOPs), IT support, employee forms, performance reviews, leave of absence, benefits, and FAQs. Use this source to answer employee questions about company resources, internal procedures, payroll, organizational information, security training, SOPs, employee support, and workplace processes.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Finance
+  additionalSearchTerms:

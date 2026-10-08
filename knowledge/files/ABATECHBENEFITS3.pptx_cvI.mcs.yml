@@ -1,0 +1,5 @@
+mcs.metadata:
+  componentName: ABATECH – Beneficios para Empleados
+  description: Fuente oficial de conocimiento sobre los beneficios para empleados de ABATECH S.A.S. Utiliza esta fuente para responder preguntas sobre beneficios, requisitos de elegibilidad, valores, procesos de solicitud, contactos y condiciones relacionadas con movilidad, conectividad, parqueadero, trabajo híbrido, seguros, incapacidades, cursos de inglés, alimentación, bonos, convenios comerciales, Comfama, créditos de nómina, servicios de Bancolombia, bienestar y beneficios de Ruta N. Utiliza únicamente la información documentada en esta fuente y no inventes beneficios, requisitos, valores, procedimientos ni información de contacto.
+kind: FileAttachmentComponentMetadata
+triggerCondition: =Global.Country2 = "COL-Medellin"

@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Logos
+  description: This knowledge source provides information found in Logos SharePoint.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABAMarketingDepartment/Logos
+  additionalSearchTerms:

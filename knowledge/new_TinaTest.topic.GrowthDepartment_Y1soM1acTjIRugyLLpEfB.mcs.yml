@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: Growth Department Intra
+  description: Centralized SharePoint site for the Growth Department, providing tools, data, and resources that support organizational expansion and execution. It includes information for planning, coordinating, and tracking growth initiatives such as new service areas, center openings, strategic expansion efforts, service area information, center directories, and related operational resources. The site also provides access to Facilities, HR, and IT support resources.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Growth
+  additionalSearchTerms:

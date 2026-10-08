@@ -1,0 +1,14 @@
+mcs.metadata:
+  componentName: Detect User Language
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: Message
+
+modelDisplayName: Detect User Language
+modelDescription: Detect the language used in the user's current message.
+action:
+  kind: InvokeAIBuilderModelTaskAction
+  aIModelId: e6c10120-1652-4423-ba8f-3713bd9c49aa
+
+outputMode: All

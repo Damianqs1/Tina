@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of Washington – Official Website
+  description: Official ABA Centers of Washington website containing information about autism services, autism screening and diagnosis, early intervention, ABA therapy for children and teens, in-home and in-school ABA therapy, center-based services, insurance, locations, service areas, consultations, careers, and contact information. Use this source to answer questions about ABA Centers of Washington and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacenterswa.com

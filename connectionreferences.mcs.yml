@@ -1,0 +1,11 @@
+﻿connectionReferences:
+  - connectionReferenceLogicalName: new_TinaTest.shared_a365memcp.fa09d195df3d4ce18a7eb3275c5720ba
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_a365memcp
+  - connectionReferenceLogicalName: new_TinaTest.shared_a365outlookcalendarmcp.71a8dc83713247fd937bd391b634c726
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_a365outlookcalendarmcp
+  - connectionReferenceLogicalName: new_TinaTest.shared_a365outlookmailmcp.shared-a365outlookma-37f2e836-91f8-4406-8076-fa6d49851716
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_a365outlookmailmcp
+  - connectionReferenceLogicalName: new_TinaTest.shared_office365users.shared-office365user-f9fb9993-c21a-4835-99aa-445dd5a52835
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_office365users
+  - connectionReferenceLogicalName: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_service-now

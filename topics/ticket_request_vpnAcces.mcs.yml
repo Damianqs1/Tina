@@ -1,0 +1,554 @@
+mcs.metadata:
+  componentName: "ticket_request_vpnAcces "
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: BeginDialog
+      id: dtolGF
+      input:
+        binding:
+          TopicServiceNowUserSysId: IdServiceNow
+
+      dialog: new_TinaTest.topic.Untitled_ntK
+      output:
+        binding:
+          TopicServiceNowUserSysId: Topic.TopicServiceNowUserSysId
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_WbVkkZ
+      latencyMessageSettings:
+        allowLatencyMessage: false
+
+      input:
+        binding:
+          vpn_info: =Global.RequestDescription
+
+      output:
+        binding:
+          predictionOutput: Topic.vpn_request
+
+      aIModelId: af8a605e-d24a-4eb5-896c-d5f3020759c2
+
+    - kind: Question
+      id: question_wpAWNK
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.AccessDuration
+      prompt: Is this access permanent or temporary?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Permanent
+              displayName: Permanent
+
+            - id: Temporary
+              displayName: Temporary
+
+    - kind: ConditionGroup
+      id: conditionGroup_m71Fcg
+      conditions:
+        - id: conditionItem_6i3QqW
+          condition: =IsBlank(Topic.vpn_request.structuredOutput.vpn_resource)
+          actions:
+            - kind: Question
+              id: question_RQc7HK
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: init:Topic.VPNResource
+              prompt: What system or resource will you access through VPN?
+              entity: StringPrebuiltEntity
+
+    - kind: SetVariable
+      id: setVariable_Fwiibw
+      variable: Topic.VPNResource
+      value: =Topic.vpn_request.structuredOutput.vpn_resource
+
+    - kind: ConditionGroup
+      id: conditionGroup_jyKML4
+      conditions:
+        - id: conditionItem_rFl6wX
+          condition: =IsBlank(Topic.vpn_request.structuredOutput.business_justification)
+          actions:
+            - kind: Question
+              id: question_MXMufe
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: init:Topic.VPNjustification
+              prompt: What is the business justification for VPN access?
+              entity: StringPrebuiltEntity
+
+    - kind: SetVariable
+      id: setVariable_nIAVaN
+      variable: Topic.VPNjustification
+      value: =Topic.vpn_request.structuredOutput.business_justification
+
+    - kind: ConditionGroup
+      id: conditionGroup_qeQ6ab
+      conditions:
+        - id: conditionItem_ZIAvdt
+          condition: =Topic.AccessDuration = 'new_TinaTest.topic.ticket_request_vpnAcces.main.question_wpAWNK'.Temporary
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_O9Plvl
+              conditions:
+                - id: conditionItem_VLEoCg
+                  condition: =IsBlank(Topic.vpn_request.structuredOutput.travel_from)
+                  actions:
+                    - kind: Question
+                      id: question_sgQZVV
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: Topic.travel_from
+                      prompt: What is the start date of your travel?
+                      entity: StringPrebuiltEntity
+
+            - kind: ConditionGroup
+              id: conditionGroup_wAmc5J
+              conditions:
+                - id: conditionItem_5P96ZY
+                  condition: =IsBlank(Topic.vpn_request.structuredOutput.travel_to)
+                  actions:
+                    - kind: Question
+                      id: question_3S3y9A
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      alwaysPrompt: true
+                      variable: init:Topic.Travel_to
+                      prompt: "`What is the end date of your travel?`"
+                      entity: StringPrebuiltEntity
+
+            - kind: InvokeAIBuilderModelAction
+              id: invokeAIBuilderModelAction_zgJEGJ
+              input:
+                binding:
+                  Fechas: =Topic.vpn_request.structuredOutput.travel_from & " | " & Topic.vpn_request.structuredOutput.travel_to
+                  Fechas2: "=\"Travel Start Date: \" & Topic.travel_from & \" | Travel End Date: \" & Topic.Travel_to"
+
+              output:
+                binding:
+                  predictionOutput: Topic.DateVpn
+
+              aIModelId: eb87eec0-1fab-44d6-b9d6-74c9a9e61e38
+
+            - kind: AdaptiveCardPrompt
+              id: lLbNLe
+              repeatCount: 2
+              card: |-
+                ={
+                  type: "AdaptiveCard",
+                  '$schema': "https://adaptivecards.io/schemas/adaptive-card.json",
+                  version: "1.5",
+                  body: [
+                    {
+                      type: "TextBlock",
+                      text: "Confirm VPN Access Dates",
+                      size: "ExtraLarge",
+                      weight: "Bolder",
+                      color: "Accent",
+                      horizontalAlignment: "Center",
+                      wrap: true,
+                      spacing: "Medium"
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Please review the travel dates below before submitting your VPN access request.",
+                      size: "Medium",
+                      horizontalAlignment: "Center",
+                      wrap: true,
+                      spacing: "Small"
+                    },
+                    {
+                      type: "Container",
+                      spacing: "Large",
+                      separator: true,
+                      items: [
+                        {
+                          type: "TextBlock",
+                          text: "Travel Start Date",
+                          size: "Medium",
+                          weight: "Bolder",
+                          color: "Accent",
+                          horizontalAlignment: "Center",
+                          wrap: true,
+                          spacing: "Medium"
+                        },
+                        {
+                          type: "TextBlock",
+                          text: Topic.DateVpn.structuredOutput.travel_from_display,
+                          size: "Medium",
+                          horizontalAlignment: "Center",
+                          wrap: true,
+                          spacing: "Small"
+                        },
+                        {
+                          type: "TextBlock",
+                          text: "Travel End Date",
+                          size: "Medium",
+                          weight: "Bolder",
+                          color: "Accent",
+                          horizontalAlignment: "Center",
+                          wrap: true,
+                          spacing: "Large"
+                        },
+                        {
+                          type: "TextBlock",
+                          text: Topic.DateVpn.structuredOutput.travel_to_display,
+                          size: "Medium",
+                          horizontalAlignment: "Center",
+                          wrap: true,
+                          spacing: "Small"
+                        }
+                      ]
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Are these dates correct?",
+                      size: "Medium",
+                      weight: "Bolder",
+                      horizontalAlignment: "Center",
+                      wrap: true,
+                      spacing: "Large"
+                    },
+                    {
+                      type: "ColumnSet",
+                      horizontalAlignment: "Center",
+                      spacing: "Medium",
+                      columns: [
+                        {
+                          type: "Column",
+                          width: "stretch"
+                        },
+                        {
+                          type: "Column",
+                          width: "auto",
+                          items: [
+                            {
+                              type: "ActionSet",
+                              actions: [
+                                {
+                                  type: "Action.Submit",
+                                  title: "Confirm Dates",
+                                  style: "positive",
+                                  data: {
+                                    actionSubmitId: "confirm_dates"
+                                  }
+                                },
+                                {
+                                  type: "Action.Submit",
+                                  title: "Change Dates",
+                                  data: {
+                                    actionSubmitId: "change_dates"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          type: "Column",
+                          width: "stretch"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              output:
+                binding:
+                  actionSubmitId: Topic.actionSubmitId
+
+              outputType:
+                properties:
+                  actionSubmitId: String
+
+            - kind: ConditionGroup
+              id: conditionGroup_GIN0Ix
+              conditions:
+                - id: conditionItem_eZkWa0
+                  condition: =Topic.actionSubmitId = """confirm_dates"""
+
+              elseActions:
+                - kind: Question
+                  id: question_1bQbN0
+                  interruptionPolicy:
+                    allowInterruption: true
+
+                  variable: init:Topic.Var1
+                  prompt: Which date is incorrect?
+                  entity:
+                    kind: EmbeddedEntity
+                    definition:
+                      kind: ClosedListEntity
+                      items:
+                        - id: Start Date
+                          displayName: Start Date
+
+                        - id: End Date
+                          displayName: End Date
+
+                        - id: both
+                          displayName: Both
+
+                - kind: ConditionGroup
+                  id: conditionGroup_wa3Arv
+                  conditions:
+                    - id: conditionItem_WwnuB4
+                      condition: =Topic.Var1 = 'new_TinaTest.topic.ticket_request_vpnAcces.main.question_1bQbN0'.'Start Date'
+                      actions:
+                        - kind: GotoAction
+                          id: vE8KFH
+                          actionId: question_sgQZVV
+
+                    - id: conditionItem_aJLSAk
+                      condition: =Topic.Var1 = 'new_TinaTest.topic.ticket_request_vpnAcces.main.question_1bQbN0'.'End Date'
+                      actions:
+                        - kind: GotoAction
+                          id: ZhAofF
+                          actionId: question_3S3y9A
+
+                    - id: conditionItem_VXxBZ7
+                      condition: =Topic.Var1 = 'new_TinaTest.topic.ticket_request_vpnAcces.main.question_1bQbN0'.Both
+
+        - id: conditionItem_tX5p3M
+          condition: =Topic.AccessDuration = 'new_TinaTest.topic.ticket_request_vpnAcces.main.question_wpAWNK'.Permanent
+
+    - kind: SetVariable
+      id: setVariable_g5PPDd
+      variable: Topic.AccessDurationString
+      value: =Text(Topic.AccessDuration)
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_FhoVFI
+      input:
+        binding:
+          sys_id: 259f04a29337aa105afbfc83a803d6c0
+          sysparm_quantity: 1
+          sysparm_requested_for: =Topic.TopicServiceNowUserSysId
+          variables: "={additional_notes: Topic.vpn_request.structuredOutput.additional_notes, business_justification: Topic.VPNjustification, permanent_or_temporary: Topic.AccessDurationString, phone_number: Global.Phone, preferred_method_of_contact: Global.Phone, requested_by: System.User.DisplayName, requested_for: Topic.TopicServiceNowUserSysId, travel_date_from: Topic.DateVpn.structuredOutput.travel_from_display, travel_date_to: Topic.DateVpn.structuredOutput.travel_to_display, what_system_resource: Topic.VPNResource}"
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.OrderItem
+
+      connectionReference: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+      connectionProperties:
+        name: new_TinaTest.shared_service-now.83167296aad94e71a0acba45e08a73b7
+        mode: Invoker
+
+      dynamicInputSchema:
+        properties:
+          sys_id:
+            displayName: Item ID
+            description: The sys_id of the catalog item to order
+            isRequired: true
+            order: 0
+            dynamicValuesConfig:
+              capability: List
+
+            type: String
+
+          sysparm_quantity:
+            displayName: Quantity
+            description: Number of items to order.
+            isRequired: true
+            order: 1
+            type: Number
+
+          sysparm_requested_for:
+            displayName: User Requested for
+            description: User for which the item is ordered for.
+            order: 2
+            dynamicValuesConfig:
+              capability: List
+
+            type: String
+
+          variables:
+            displayName: Order Item Body
+            description: variables array
+            order: 3
+            type:
+              kind: Record
+              properties:
+                additional_notes:
+                  displayName: Additional notes
+                  order: 9
+                  type: String
+
+                business_justification:
+                  displayName: What is the business justification for VPN access?
+                  isRequired: true
+                  order: 5
+                  type: String
+
+                permanent_or_temporary:
+                  displayName: Is this access permanent or temporary?
+                  isRequired: true
+                  order: 6
+                  enumDisplayNames:
+                    - -- None --
+                    - Permanent
+                    - Temporary
+                  enumValues:
+                    - 
+                    - permanent
+                    - temporary
+                  type: String
+
+                phone_number:
+                  displayName: Phone number
+                  order: 3
+                  type: String
+
+                preferred_method_of_contact:
+                  displayName: "Preferred method of contact:"
+                  isRequired: true
+                  order: 2
+                  enumDisplayNames:
+                    - -- None --
+                    - Phone
+                    - Email
+                    - Teams
+                  enumValues:
+                    - 
+                    - phone
+                    - email
+                    - teams
+                  type: String
+
+                requested_by:
+                  displayName: Requested by
+                  order: 0
+                  dynamicValuesConfig:
+                    capability: List
+
+                  type: String
+
+                requested_for:
+                  displayName: Requested for
+                  isRequired: true
+                  order: 1
+                  type: String
+
+                travel_date_from:
+                  displayName: "Dates of travel. From:"
+                  order: 7
+                  type: String
+
+                travel_date_to:
+                  displayName: "Dates of travel. To:"
+                  order: 8
+                  type: String
+
+                what_system_resource:
+                  displayName: What system or resource will you access through VPN?
+                  isRequired: true
+                  order: 4
+                  type: String
+
+      operationId: OrderItem
+
+    - kind: ConditionGroup
+      id: conditionGroup_PyMOAa
+      conditions:
+        - id: conditionItem_WRKQfu
+          condition: =IsBlank(Topic.OrderItem.result.request_id)
+          actions:
+            - kind: SendActivity
+              id: sendActivity_5ZUGTn
+              activity: "`Sorry, I couldn't create your VPN Access Request in ServiceNow. Please try again later or contact the IT team.`"
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_BOVd6k
+          activity:
+            attachments:
+              - kind: AdaptiveCardTemplate
+                cardContent: |-
+                  ={
+                    '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                    type: "AdaptiveCard",
+                    version: "1.5",
+                    body: [
+                      {
+                        type: "TextBlock",
+                        text: "VPN Access Request Created",
+                        size: "Large",
+                        weight: "Bolder",
+                        color: "Accent",
+                        horizontalAlignment: "Center",
+                        wrap: true
+                      },
+                      {
+                        type: "TextBlock",
+                        text: "Your VPN access request was successfully created in ServiceNow.",
+                        horizontalAlignment: "Center",
+                        wrap: true
+                      },
+                      {
+                        type: "TextBlock",
+                        text: "Ticket Information",
+                        size: "Medium",
+                        weight: "Bolder",
+                        spacing: "Medium",
+                        wrap: true
+                      },
+                      {
+                        type: "FactSet",
+                        facts: [
+                          {
+                            title: "Requested for:",
+                            value: System.User.DisplayName
+                          },
+                          {
+                            title: "Contact method:",
+                            value: Global.Phone
+                          }
+                        ]
+                      },
+                      {
+                        type: "TextBlock",
+                        text: "VPN Request Details",
+                        size: "Medium",
+                        weight: "Bolder",
+                        spacing: "Medium",
+                        wrap: true
+                      },
+                      {
+                        type: "FactSet",
+                        facts: [
+                          {
+                            title: "System / Resource:",
+                            value: Topic.VPNResource
+                          },
+                          {
+                            title: "Business justification:",
+                            value: Topic.VPNjustification
+                          },
+                          {
+                            title: "Access duration:",
+                            value: Topic.AccessDurationString
+                          },
+                          {
+                            title: "Travel from:",
+                            value: Topic.travel_from
+                          },
+                          {
+                            title: "Travel to:",
+                            value: Topic.Travel_to
+                          }
+                        ]
+                      }
+                    ]
+                  }
+
+inputType: {}
+outputType: {}

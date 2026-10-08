@@ -1,0 +1,40 @@
+mcs.metadata:
+  componentName: Fallback
+  description: This system topic triggers when the user's utterance does not match any existing topics.
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_LktzXw
+      conditions:
+        - id: conditionItem_tlGIVo
+          condition: =System.FallbackCount < 3
+          actions:
+            - kind: SendActivity
+              id: sendMessage_QZreqo
+              activity:
+                text:
+                  - I'm sorry, I'm not sure how to help with that. Can you try rephrasing?
+                attachments:
+                  - kind: AdaptiveCardTemplate
+                    cardContent: |-
+                      {
+                        "type": "AdaptiveCard",
+                        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.5",
+                        "body": [
+                          {
+                            "type": "Image",
+                            "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABAMarketingDepartment/Logos/Tina/Thinking.png?d=w160be653f438448dbc4bbaada5541972&csf=1&web=1&e=eiFMJy",
+                            "height": "200px",
+                            "horizontalAlignment": "Center"
+                          }
+                        ]
+                      }
+
+      elseActions:
+        - kind: BeginDialog
+          id: 5aXj5M
+          dialog: new_TinaTest.topic.Escalate

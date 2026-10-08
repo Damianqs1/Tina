@@ -1,0 +1,84 @@
+mcs.metadata:
+  componentName: Colombia Employee Photo Gallery
+  description: Use this topic when the user asks to find, locate, access, or view employee photos from Colombia, including questions about where Colombia employee photos are stored or requests for photos of Colombia-based employees.
+kind: AdaptiveDialog
+modelDescription: |-
+  Use this topic when the user asks to find, view, or locate photos of employees based in Colombia, or asks about the Colombia employee photo gallery.
+
+  Examples include:
+  - Fotos de empleados de Colombia
+  - Foto de un empleado de Colombia
+  - Fotos de Colombia
+  - Galería de fotos de Colombia
+  - Colombia employee photos
+  - Colombia employee photo gallery
+  - Dónde están las fotos de los empleados de Colombia
+  - Dónde guardan las fotos de los empleados de Colombia
+
+  Use this topic specifically for the Colombia Employee Photo Gallery.
+  Do not use it for U.S. photo galleries, general company photos, events, marketing media, or unrelated HR information.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SendActivity
+      id: sendActivity_mZt1YU
+      activity:
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              {
+                "type": "AdaptiveCard",
+                "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "TextBlock",
+                    "text": "Colombia Employee Photo Gallery",
+                    "weight": "Bolder",
+                    "size": "Medium",
+                    "horizontalAlignment": "Center",
+                    "wrap": true
+                  },
+                  {
+                    "type": "Image",
+                    "size": "Large",
+                    "horizontalAlignment": "Center",
+                    "url": "https://abacenter.sharepoint.com/:i:/r/sites/ABATECHCommunications/Shared%20Documents/Holiday%20Party%202025/Fotos%20Holiday%20Party%20ABATECH%20-%20CURATECH%202/DNT00888.jpg?d=w531240032a3c41d2bbe86911469192f5&csf=1&web=1&e=qhCEit",
+                    "altText": "Colombia Employee Photo Gallery"
+                  },
+                  {
+                    "type": "ColumnSet",
+                    "columns": [
+                      {
+                        "type": "Column",
+                        "width": "stretch"
+                      },
+                      {
+                        "type": "Column",
+                        "width": "auto",
+                        "items": [
+                          {
+                            "type": "ActionSet",
+                            "actions": [
+                              {
+                                "type": "Action.OpenUrl",
+                                "title": "Ver galería",
+                                "url": "https://abacenter.sharepoint.com/sites/ABATECHCommunications/Shared%20Documents/Forms/AllItems.aspx?viewid=88512084%2Db2c3%2D4e29%2Da469%2Db77172034a83&p=true&ga=1&TeamsCID=a9831e5d%2Db2de%2D40e0%2Db77d%2Dafc9b886b393&OR=Teams%2DHL&CT=1789506980119&ovuser=5335a649%2D8f23%2D4734%2Dae22%2Df567449abd84%2Cdquintero%40abatechnology%2Ecom&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNjA4MTMxOTMyMSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Column",
+                        "width": "stretch"
+                      }
+                    ]
+                  }
+                ]
+              }
+
+inputType: {}
+outputType: {}

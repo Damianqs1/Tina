@@ -1,0 +1,9 @@
+mcs.metadata:
+  componentName: "Clinical & Field Operations Intra "
+  description: Centralized knowledge hub for Clinical and Field Operations. Contains clinical and operational resources including admissions, assessments, clinical policies, clinical safety, clinical resources, diagnostics, sales operations, education and engagement, incident reports, clinic directory information, policies and procedures, recovery and retention resources, documents, and other field-operation materials. Use this source to answer employee questions about clinical processes, operational procedures, field resources, clinic information, safety, assessments, admissions, and related organizational processes.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/Clinical-and-Field-Operations
+  additionalSearchTerms:

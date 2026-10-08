@@ -1,0 +1,7 @@
+mcs.metadata:
+  componentName: ABA Centers of America – Official Website
+  description: Official ABA Centers of America website containing information about autism diagnosis and testing, early intervention, child, teen and adult ABA therapy, in-home and in-school ABA therapy, clinic services, telehealth, caregiver training, community life skills, insurance, locations, careers, autism resources, and contact information. Use this source to answer questions about ABA Centers of America and its publicly available services and information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.abacenters.com/

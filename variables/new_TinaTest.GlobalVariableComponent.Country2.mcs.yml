@@ -1,0 +1,8 @@
+mcs.metadata:
+  componentName: Country2
+kind: Variable
+name: Country2
+scope: User
+isExternalInitializationAllowed: true
+isOutputToExternalCallers: true
+initializationTimeoutInMilliseconds: 0

@@ -1,0 +1,19 @@
+mcs.metadata:
+  componentName: US Photo & Video Gallery Intra
+  description: |-
+    Official internal SharePoint knowledge source containing photos and videos from ABA Centers activities, events, clinics, graduations, Town Halls, Autism Acceptance events, and other company activities in the United States.
+
+    Use this source when users ask about:
+    - Photos or videos of ABA Centers in the United States.
+    - Company events and activities in the United States.
+    - Photos of ABA Centers clinics or locations in the United States.
+    - Graduations, Town Halls, Autism Acceptance events, and other U.S. company events.
+    - Finding or accessing photos and videos from the U.S. company gallery.
+
+    Do not use this source for employee-specific photos, employee directories, HR records, or Colombia-specific employee information.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://abacenter.sharepoint.com/sites/ABAMarketingDepartment/SitePages/Photo%20Gallery.aspx
+  additionalSearchTerms:
